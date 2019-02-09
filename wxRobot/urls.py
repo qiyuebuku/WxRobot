@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from wx import views 
+from login import views as login_views
+from background_frame import views as frame_views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.main_index),
-    path('home/',views.home),
-    path('index/',views.index),
-    path('is_login/',views.is_login),
-    path('logout/',views.logout),
+    path('',login_views.main_index),
+    path('home/<str:puid>',frame_views.home,name='home'),
+    path('index/',login_views.index),
+    path('is_login/',login_views.is_login),
+    path('logout/',frame_views.logout),
+    path('Heart_rate_response/',frame_views.Heart_rate_response)
 ]

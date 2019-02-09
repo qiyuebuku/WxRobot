@@ -111,8 +111,8 @@
 
 
 
-    <script src="{% static "jquery-1.12.4.js" %}"></script>
-    <script src="{% static "jquery.cookie.js" %}"></script>
+    <script src="{% static "js/jquery-1.12.4.js" %}"></script>
+    <script src="{% static "js/jquery.cookie.js" %}"></script>
     <script>
 
         // {#点击遮罩层时刷新二维码#}
@@ -163,7 +163,7 @@
                         // 如果二维码已经失效，则将页面的二维码替换为错误的标志，
                         // 并且关闭检测状态定时器
                         if (inventory == false) {
-                            $('#img_page').attr('src', "{% static "image/error.png" %}")
+                            $('#img_page').attr('src', "{% static 'image/error.png' %}")
                             console.log('请刷新二维码');
                             flag = false;
                         }
@@ -171,8 +171,10 @@
                         if (alive == true) {
                             console.log('登录成功')
                             flag = false
+                            var puid = data['puid'];
+                            // console.log(puid);
                             // 重定向网页到home
-                            $(location).attr('href', '/home/?uuid='+$('#uuid').text());
+                            $(location).attr('href', '/home/'+puid);
                         }
                     }
                 })
