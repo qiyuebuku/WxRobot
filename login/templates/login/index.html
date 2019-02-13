@@ -89,7 +89,7 @@
 <body>
     <!-- {#二维码显示#} -->
     <div class="body_page" id="qr_code">
-        <h1 style="margin: 0 auto;text-align: center">扫描二维码登陆</h1>
+        <h1 style="margin: 0 auto;text-align: center" id="hint">扫描二维码登陆</h1>
 
         <!-- 经过base64编码的图片在html的<img>标签显示时，需要添加一些属性，即下面的data:image/jpeg;base64,编码 -->
         <img src="data:image/jpeg;base64,{{qrcode}}" id="img_page" />
@@ -164,23 +164,25 @@
                         // 并且关闭检测状态定时器
                         if (inventory == false) {
                             $('#img_page').attr('src', "{% static 'image/error.png' %}")
+                            $('#hint').text('请刷新二维码')
                             console.log('请刷新二维码');
                             flag = false;
                         }
                         alive = data['alive'];
                         if (alive == true) {
+                            var src = "data:image/jpeg;base64," + data['avatar_bytes'];                
+                            $('#img_page').attr('src', src);
                             console.log('登录成功')
+                            // 停止像服务端发送查询请求
                             flag = false
-                            var puid = data['puid'];
-                            // console.log(puid);
                             // 重定向网页到home
-                            $(location).attr('href', '/home/'+puid);
+                            $(location).attr('href', '/home/');
                         }
                     }
                 })
             }
 
-        },3000);
+        },2000);
 
         // 阻止定时刷新
         // clearInterval(ref);

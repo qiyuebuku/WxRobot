@@ -8,9 +8,9 @@ import base64
 import json 
 import time
 from login import helper
-# from login.helper.Robot_manage import *
 from login.helper import debug,rmt
-from background_frame.helper import aom
+from background.helper import aom
+# from background_frame.helper import aom
 
 
 
@@ -37,24 +37,7 @@ class BotThread(Thread):
             # 实例化一个机器人
             self.bot = Bot(qr_callback=self.qr_callback)
             # 开启puid缓存
-            puid_map = self.bot.enable_puid('wxpy_puid.pkl')
-            # # 获取Puid
-            # puid = puid_map.get_puid(self.bot.self)   
-            # # 加入已登录字典         
-            # rmt.has_logged[puid]={'bot':self.bot,'beat':30}
-            # self.bot = Bot(qr_callback=self.qr_callback,login_callback=self.login_callback)
-            # old_file = os.path.join(os.path.dirname(__file__),'cache',self.uuid+'.pkl')
-            # puid_map1 = self.bot.enable_puid(old_file)
-            # puid1 = puid_map1.get_puid(self.bot.self)
-            # new_file = os.path.join(os.path.dirname(__file__),'cache',puid1+'.pkl')
-            # puid_map2 = self.bot.enable_puid(new_file)
-            # os.remove(old_file)
-            # print(puid_map2.get_puid(self.bot.self))
-            # time.sleep(2)
-            # new_file = os.path.join(os.path.dirname(__file__),'cache',self.bot.user_details(self.bot.self).puid+'.pkl')
-            # print(new_file)
-            # if not os.path.exists(new_file):
-            #     shutil.copyfile(old_file,new_file)
+            self.bot.enable_puid('wxpy_puid.pkl')
         except KeyError:
             debug.print_l('该微信账号已被限制登录网页微信，请更换微信号后再试')
             self.bot_status=False
@@ -100,13 +83,21 @@ def is_login(request):
         if data['alive']:
             # 根据uuid获取机器人对象
             bot = bot_object.bot
-            # 获取puid身份标识符
+            user_details = bot.user_details(bot.self)
+            # 微信名称
+            data['user_name'] = user_details.name
+            # 微信头像
+            data['avatar_bytes'] = base64.b64encode(user_details.get_avatar()).decode() 
+            # 获取puid身份标识符 
             puid = bot.user_details(bot.self).puid
-            # 将登陆成功的对象添加到活跃对象管理器
-            # aom.has_logged[puid]={'bot':bot,'time':time.time()}
+            # 将登陆成功的对象添加到aom里面
             aom.add_logged(bot)
-            data['puid']=puid
-            # 登录成功，则将其从监控列表移除            
+            # 将登陆状态设置为登陆成功
+            request.session['prefsession']=True
+            # 设置puid到缓存
+            request.session['puid'] = puid
+            request.session.set_expiry(0)
+            # 登录成功，获取对象，并将其从监控列表移除            
             if rmt.cleaner(bot_uuid):
                 debug.print_l('将%s移除成功'%bot_uuid)
     return HttpResponse(json.dumps(data))

@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login',
-    'background_frame',
+    'background',
 ]
 
 MIDDLEWARE = [

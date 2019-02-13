@@ -23,10 +23,10 @@ class Active_object_manager(Thread):
             for puid in has_logged:
                 # 将当前时间退回到30秒前，依次和每个对象最近一次汇报心跳的时间作对比
                 # 如果大于他，说明这个对象的汇报超时了，则将其踢出
-                if self.has_logged[puid]['time']<(current_time-self.beat_timeout):
-                    print('上次汇报时间：',self.has_logged[puid]['time'])
-                    print('当前时间：',current_time)
-                    print('puid:%s，心跳超时'%puid)
+                if self.has_logged[puid]['date']<(current_time-self.beat_timeout):
+                    print('上次汇报时间：',time.ctime(self.has_logged[puid]['date']))
+                    print('当前时间：',time.ctime(current_time))
+                    print('puid:%s，心跳超时%s秒'%(puid,(current_time-self.beat_timeout-self.has_logged[puid]['date']) ))
                     cleaner_uuid.append(puid)
 
             for puid in cleaner_uuid:
@@ -48,8 +48,9 @@ class Active_object_manager(Thread):
         try:
             # 获取机器人对象
             bot_dict = self.has_logged[bot_puid]
-        except (KeyError,AttributeError):
-            return False
+            # print(bot_dict)
+        except (KeyError,AttributeError,):
+            return None
         return bot_dict
     
     # 获取登陆者的详细信息
@@ -58,9 +59,11 @@ class Active_object_manager(Thread):
         :param bot_uuid 机器人的uuid标识符
         :return 名称、头像，微信ID
         """
-        bot = self.get_bot_dict(bot_puid)['bot']
-        if not bot :
-            return False
+        print(bot_puid)
+        bot_dict = self.get_bot_dict(bot_puid)
+        if  not bot_dict:
+            return None 
+        bot = bot_dict.get('bot')
         # 获取对象的详细信息
         user_details = bot.user_details(bot.self)
         # print(dir(user_details))
@@ -78,7 +81,7 @@ class Active_object_manager(Thread):
         CITY = user_details.city
         # 个性签名
         SIGNATURE = user_details.signature
-        PUID = user_details.puid
+        # PUID = user_details.puid
         details={
             'user_name':USER_NAME,
             'avatar':AVATAR_BYTES,
@@ -88,12 +91,13 @@ class Active_object_manager(Thread):
             'province' : PROVINCE,
             'city' : CITY,
             'signature' : SIGNATURE,
-            'puid': PUID,
+            # 'puid': PUID,
         }
         return details
+
     def add_logged(self,bot):
-        puid = bot.user_details(bot.self).puid        
-        self.has_logged[puid]={'bot':bot,'time':time.time()}
+        puid = bot.user_details(bot.self).puid      
+        self.has_logged[puid]={'bot':bot,'date':time.time()}
 
 
 
