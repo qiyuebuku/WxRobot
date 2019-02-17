@@ -9,8 +9,7 @@ import json
 import time
 from login import helper
 from login.helper import debug,rmt
-from background.helper import aom
-# from background_frame.helper import aom
+from mainpage.helper import aom
 
 
 

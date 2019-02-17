@@ -16,30 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from login import views as login_views
-from background import views as frame_views
+from mainpage import views as mainpage_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',login_views.main_index),
     path('index/',login_views.index),
     path('is_login/',login_views.is_login),
-    path('logout/',frame_views.logout),
-    path('Heart_rate_response/',frame_views.Heart_rate_response),
-
-    path('home/',frame_views.home),
-    path('data_analysis/',frame_views.data_analysis),
-    path('custom_plug/',frame_views.custom_plug),
-    path('timed_transmission/',frame_views.timed_transmission),
-    path('intelligent_chat/',frame_views.intelligent_chat),
-
-
-    # path('data_analysis',)
-
-
-
-#     Dashboard  -> 数据分析  -> data_analysis
-# Components -> 自定义插件管理  ->  custom_plug-in
-# Notifications -> 定时发送  -> timed_transmission
-# Typography ->  智能聊天 -> Intelligent_chat
-
-
+    path('logout/',mainpage_views.logout),
+    path('Heart_rate_response/',mainpage_views.Heart_rate_response),
+    path('mainpage/',mainpage_views.mainpage),
+    path('test/',mainpage_views.test),
 ]

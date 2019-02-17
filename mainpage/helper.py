@@ -1,6 +1,12 @@
 import base64
 from threading import Thread
 import time
+from wordcloud import WordCloud
+import cv2
+import jieba
+import matplotlib.pyplot as plt
+import numpy as np
+from PIL import Image
 
 class Active_object_manager(Thread):
     def __init__(self,*,beat_timeout=60,inspection_interval=10):
@@ -106,3 +112,79 @@ class Active_object_manager(Thread):
 aom = Active_object_manager(beat_timeout=60)
 aom.setDaemon(True)
 aom.start()
+
+
+
+
+class Data_analysis(object):
+    def __init__(self,Bot):
+        self.Bot = Bot 
+        self.puid = Bot.user_details(Bot.self).puid
+    def get_analysis_result(self):
+        # 获取所有好友
+        friends = self.Bot.friends(update=True)
+
+        # 获取所有好友的数量
+        friends_count = len(friends)
+        # 获取所有群聊数量
+        # 一些不活跃的群可能无法被获取到，可通过在群内发言，或修改群名称的方式来激活
+        groups_count = len(self.Bot.groups(update=True))
+        # 获取所有公众号数量
+        msp_count = len(self.Bot.mps(update=True))
+        # 获取所有人的性别字典
+        gender_statistics = {'male':len(friends.search(sex='MALE')),'female':len(friends.search(sex='FEMALE')),'secrecy':len(friends.search(sex='None'))}
+        # 获取所有人的个性签名
+        signatures = {i.name:i.signature for i in friends}
+        # 获取所有人的所在地区
+        # 优先获取市，如果没有则返回省
+        region={}
+        for f in friends:
+            region[f.name] = f.city if f.city else f.province
+
+
+        result_data = {
+            'friends_count':friends_count,
+            'groups_count':groups_count,
+            'msp_count':msp_count,
+            'gender_statistics':gender_statistics,
+            'signatures':self.word_cloud(signatures.values(),r'mainpage\static\img\color_mask.jpg'),
+            'region':region
+        }
+
+        return result_data
+
+    def word_cloud(self,text,color_mask_path):
+        """
+        功能：将text按照img的形状做呈现出词云
+        :param text 需要呈现的文字，词组
+        :param color_mask_path 参照图路径地址
+        :return 制作完成的bytes格式图片
+        """
+        print(text)
+        cut_text =" ".join(jieba.cut(" ".join(text)))
+        color_mask = np.array(Image.open(color_mask_path))
+        cloud = WordCloud(
+            #设置字体，不指定就会出现乱码
+            font_path=" C:\\Windows\\Fonts\\STXINGKA.TTF",
+            #设置背景色
+            background_color='white',
+            #词云形状
+            mask=color_mask,
+            #允许最大词汇
+            max_words=2000,
+            #最大号字体
+            max_font_size=40,
+        )
+        
+        wCloud = cloud.generate(cut_text)
+        img = wCloud.to_image()
+
+        return img.tobytes()
+        # # print()
+        # # wCloud.to_file('cloud.jpg')
+        # print(wCloud.to_image)
+        
+        # import matplotlib.pyplot as plt
+        # plt.imshow(wCloud, interpolation='bilinear')
+        # plt.axis('off')
+        # plt.show()
