@@ -16,14 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from login import views as login_views
-from mainpage import views as mainpage_views
+from homepage import views as homepage_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',login_views.main_index),
     path('index/',login_views.index),
     path('is_login/',login_views.is_login),
-    path('logout/',mainpage_views.logout),
-    path('Heart_rate_response/',mainpage_views.Heart_rate_response),
-    path('mainpage/',mainpage_views.mainpage),
-    path('test/',mainpage_views.test),
+    path('logout/',homepage_views.logout),
+    path('Heart_rate_response/',homepage_views.Heart_rate_response),
+    path('analysis_result/',homepage_views.analysis_result),    
+    # path('get_world_cloud/',homepage_views.get_world_cloud),
+    path('mainpage/',homepage_views.mainpage),
+    path('test/',homepage_views.test),
 ]
