@@ -4,6 +4,8 @@ from homepage import helper
 from login.helper import debug,rmt
 import time
 import json
+from wxpy import *
+from homepage import models
 # Create your views here.
 
 # 用户管理对象
@@ -42,19 +44,16 @@ def Heart_rate_response(request):
     bot_dict['date']=time.time()
     return HttpResponse('ok')
 
+
 def analysis_result(request):
     puid = request.session['puid']
     bot = aom.get_bot_dict(puid)['bot']
     if not bot.result:
         return HttpResponse('没有分析好')
     else:
-        # print('数据分析成功')
-        # print(bot.result)
         # 以json格式将处理好的数据返回给前端
         data = json.dumps(bot.result)
         print(data)
-        # data = "hello"
-        # print(data)
         return HttpResponse(data)
 
     
@@ -65,11 +64,11 @@ def mainpage(request):
     print('这里是manpage....')
     if request.method ==  "GET":
         puid = request.session.get('puid')
-        user_details = aom.bot_details(puid)
+        init_details_info = aom.init_details_info(puid)
         # 如果获取到了用户的详细信息，则进入后台页面
-        if user_details:
-            debug.print_l('%s的签名为：%s'%(user_details['user_name'],user_details['signature']))
-            return render(request,'homepage/mainpage.html',user_details)
+        if init_details_info:
+            debug.print_l('%s的签名为：%s'%(init_details_info['user_name'],init_details_info['signature']))
+            return render(request,'homepage/mainpage.html',init_details_info)
         else:
             return HttpResponseRedirect('/index/')  
     elif request.method == "POST":
@@ -116,6 +115,57 @@ def get_world_cloud(request):
             return HttpResponse(world_cloud)
         else:
             return HttpResponse('no')
+
+def save_chat_config(request):
+    friends = request.GET.get('friends')
+    groups = request.GET.get('groups')
+    # models.
+    print('friends',friends)
+    print('groups',groups)
+
+    return HttpResponse('ok')
+
+# def groups_and_friends_info(request):
+#     # 获取puid
+#     puid = request.session.get('puid')
+#     # 获取用户的bot对象
+#     bot = aom.get_bot_dict(puid).get('bot')
+#     groups = bot.groups(update = True)
+#     group_infos = []
+#     for group in groups:
+#         group.update_group(True)
+
+#         gname = group.name
+#         # print("群名称：",gname)
+
+#         gowner = group.owner.name  #群主
+#         # print("群主：",gowner)
+
+#         #所有群成员
+#         members = group.members 
+#         # print("群内成员：",group.members) 
+
+#         # 统计性别
+#         mtfratio = {'male':len(members.search(sex=MALE)),'female':len(members.search(sex=FEMALE)),'secrecy':len(members.search(sex=None))}
+#         # print(mtfratio)
+
+#         pcount = len(members)  #群成员数量
+#         group_infos.append({'gname':gname,'gowner':gowner,'pcount':pcount,'mtfratio':mtfratio,'puid':group.puid})
+
+#     friends = bot.friends(update=True)
+#     user_infos = []
+#     for friend in friends:
+#         uname = friend.name 
+#         usex = friend.sex 
+#         user_infos.append({'uname':uname,'usex':usex})
+#     print('user_infos',user_infos)
+#     print('group_infos',group_infos)
+#     ug_info = json.dumps({'user_info':user_infos,'group_info':group_infos})
+#     return HttpResponse(ug_info)
+        
+
+    
+
 def test(request):
     return render(request,'homepage/test05.html')
 

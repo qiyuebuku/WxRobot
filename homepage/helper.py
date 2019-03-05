@@ -61,20 +61,18 @@ class Active_object_manager(Thread):
             return None
         return bot_dict
     
-    # 获取登陆者的详细信息
-    def bot_details(self,bot_puid):
+    def init_details_info(self,bot_puid):
         """
+        初始化登陆者的详细信息
         :param bot_uuid 机器人的uuid标识符
         :return 名称、头像，微信ID
         """
-        print(bot_puid)
         bot_dict = self.get_bot_dict(bot_puid)
         if  not bot_dict:
             return None 
         bot = bot_dict.get('bot')
-        # 获取对象的详细信息
+        # 获取登陆者的详细信息
         user_details = bot.user_details(bot.self)
-        # print(dir(user_details))
         # 微信名称
         USER_NAME =user_details.name
         # 微信头像
@@ -89,7 +87,39 @@ class Active_object_manager(Thread):
         CITY = user_details.city
         # 个性签名
         SIGNATURE = user_details.signature
-        # PUID = user_details.puid
+
+        # 获取登陆者的好友和群组的详细信息
+        groups = bot.groups(update = True)
+        group_infos = []
+        for group in groups:
+            group.update_group(True)
+
+            gname = group.name
+            # print("群名称：",gname)
+
+            gowner = group.owner.name  #群主
+            # print("群主：",gowner)
+
+            #所有群成员
+            members = group.members 
+            # print("群内成员：",group.members) 
+
+            # 统计性别
+            mtfratio = {'male':len(members.search(sex=MALE)),'female':len(members.search(sex=FEMALE)),'secrecy':len(members.search(sex=None))}
+            # print(mtfratio)
+
+            pcount = len(members)  #群成员数量
+            group_infos.append({'gname':gname,'gowner':gowner,'pcount':pcount,'mtfratio':mtfratio,'puid':group.puid})
+            # group_infos.append({'gname':gname,'gowner':gowner,'pcount':pcount,'puid':group.puid})
+
+        friends = bot.friends(update=True)
+        user_infos = []
+        sex_dict = {0:'保密',1:'男',2:'女'}
+        for friend in friends:
+            uname = friend.name 
+            usex = sex_dict[friend.sex]  
+            user_infos.append({'uname':uname,'usex':usex})
+
         details={
             'user_name':USER_NAME,
             'avatar':AVATAR_BYTES,
@@ -99,10 +129,10 @@ class Active_object_manager(Thread):
             'province' : PROVINCE,
             'city' : CITY,
             'signature' : SIGNATURE,
-            # 'puid': PUID,
+            'ug_detail_info':{'user_info':user_infos,'group_info':group_infos}
         }
         return details
-
+               
     def add_logged(self,bot):
         puid = bot.user_details(bot.self).puid      
         self.has_logged[puid]={'bot':bot,'date':time.time()}
@@ -111,7 +141,7 @@ class Active_object_manager(Thread):
         t = Data_analysis(bot)
         t.start()
 
-
+    
 
 
 

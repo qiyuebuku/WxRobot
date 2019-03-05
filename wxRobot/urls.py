@@ -25,7 +25,7 @@ urlpatterns = [
     path('logout/',homepage_views.logout),
     path('Heart_rate_response/',homepage_views.Heart_rate_response),
     path('analysis_result/',homepage_views.analysis_result),    
-    # path('get_world_cloud/',homepage_views.get_world_cloud),
+    path('save_chat_config/',homepage_views.save_chat_config),
     path('mainpage/',homepage_views.mainpage),
     path('test/',homepage_views.test),
 ]

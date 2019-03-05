@@ -1,13 +1,69 @@
-// 性别
-// update_sex();
 // 头像
 update_avatar();
 // 签名
 update_signature();
 
+// 获取数据分析结果
+var update_analysis = setInterval(update_analysis,5000);
+function update_analysis(){
+    $.ajax({
+        url: '/analysis_result/',
+        type: 'get',
+        headers:{ "X-CSRFToken": '{{ csrf_token }}'},  
+        success:function(arg){
+            
+            if (arg!="没有分析好")
+            {
+                clearInterval(update_analysis);
+                var data = JSON.parse(arg);
+                console.log(data);
+                $('#loading-body').attr('style','display:none');
+                $('#loading-body').next().removeClass('hidden');
+                update_analysis_page(data);
+            }
+        }   
+    })
+}
+
+
+function update_analysis_page(data){
+    // 好友数量
+    griends_count = data['friends_count'];
+    // 更新数据分析页面
+    $('#friends_count').text(griends_count);
+    $('#groups_count').text(data['groups_count']);
+    $('#msps_count').text(data['msp_count']);
+    update_sex(data['gender_statistics']);
+    friends_city(data['region']);  
+
+    var src = "data:image/jpeg;base64," + data['world_cloud'];
+    $('#world_cloud').attr('src',src);
+}
 
 
 
+function set_world_cloud(){
+    console.log('get_world_cloud')
+    $.ajax({
+        url: '/get_world_cloud/',
+        type: 'get',
+        headers:{ "X-CSRFToken": '{{ csrf_token }}'},  
+        success:function(arg){
+            console.log(arg)
+            if (arg!="no")
+            {
+                var src = "data:image/jpeg;base64," + arg;
+                $('#world_cloud').attr('src',arg);
+            }
+        }   
+    })
+
+}
+
+
+
+
+// 好友地区分布图
 function friends_city(region) {
 
 	var dom = document.getElementById("container");
@@ -58,7 +114,7 @@ function friends_city(region) {
 		citys[pos] = temp;
 	}
 
-	console.log('人数最多的城市',citys[0]['value'],'人数最少的城市:', citys[citys.length-1]['value'])
+	console.log('人数最少的城市',citys[0]['value'],'人数最多的城市:', citys[citys.length-1]['value'])
 	option = null;
 	option = {
 		title: {
