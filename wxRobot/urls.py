@@ -15,16 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from login import views as login_views
+from initialize import views as initialize_views
 from homepage import views as homepage_views
+from logIntoRegister import views as login_views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',login_views.main_index),
-    path('index/',login_views.index),
-    path('is_login/',login_views.is_login),
-    path('logout/',homepage_views.logout),
-    path('Heart_rate_response/',homepage_views.Heart_rate_response),
-    path('analysis_result/',homepage_views.analysis_result),    
+    path('',initialize_views.main_index),
+    path('login/',login_views.login),
+    path('register/',login_views.register),
+    path('wx_init/',initialize_views.wx_init),
+    # path('wx_status/',initialize_views.wx_status),
+    # path('logout/',homepage_views.logout),
+    # path('Heart_rate_response/',homepage_views.Heart_rate_response),
+    # path('analysis_result/',homepage_views.analysis_result),    
     path('save_chat_config/',homepage_views.save_chat_config),
     path('mainpage/',homepage_views.mainpage),
     path('test/',homepage_views.test),

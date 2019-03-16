@@ -1,15 +1,18 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect
 from homepage import helper
-from login.helper import debug,rmt
+from helper.debug import debug
 import time
 import json
 from wxpy import *
-from homepage import models
+from databases import models
+from helper.bot_manager import robot_management as rm 
+from helper.channels_manager import initialize_channels as ic
+
 # Create your views here.
 
 # 用户管理对象
-aom = helper.aom
+# aom = helper.aom
 
 def check_user(fun):
     """
@@ -18,66 +21,80 @@ def check_user(fun):
     def function(request,*args,**kwargs):
         v = request.session.get('prefsession')
         if not v:
+            print('用户未登录')
             return redirect('/index/')
         return fun(request,*args,**kwargs)
     return function
 
-# 用户的退出操作
-def logout(request):
-    # puid = request.GET['puid']
-    puid = request.session['puid']
-    bot = aom.get_bot_dict(puid)['bot']
-    debug.print_l("用户ID：%s请求退出"%puid)
-    # 如果提交的puid可以获取到对象，并且注销成功和从列表里面也删除成功，则跳转到登录页面
-    if  bot and bot.logout() and aom.cleaner(puid):
-        return HttpResponseRedirect('/index/')
-    return HttpResponse("退出失败！！！")    
+# # 用户的退出操作
+# def logout(request):
+#     puid = request.GET['puid']
+#     bot = aom.get_bot_dict(puid)['bot']
+#     debug.print_l("用户ID：%s请求退出"%puid)
+#     # 如果提交的puid可以获取到对象，并且注销成功和从列表里面也删除成功，则跳转到登录页面
+#     if  bot and bot.logout() and aom.cleaner(puid):
+#         return HttpResponseRedirect('/index/')
+#     return HttpResponse("退出失败！！！")    
 
-def Heart_rate_response(request):
-    print('这里是heart_rate_response')
-    # 用于刷新用户提交心跳的时间
-    # puid = request.POST.get('puid')
-    puid = request.session['puid']
-    bot_dict = aom.get_bot_dict(puid)
-    if not bot_dict:
-        return HttpResponse('no')
-    bot_dict['date']=time.time()
-    return HttpResponse('ok')
-
-
-def analysis_result(request):
-    puid = request.session['puid']
-    bot = aom.get_bot_dict(puid)['bot']
-    if not bot.result:
-        return HttpResponse('没有分析好')
-    else:
-        # 以json格式将处理好的数据返回给前端
-        data = json.dumps(bot.result)
-        print(data)
-        return HttpResponse(data)
-
-    
+# def Heart_rate_response(request):
+#     print('这里是heart_rate_response')
+#     # 用于刷新用户提交心跳的时间
+#     # puid = request.POST.get('puid')
+#     puid = request.session['puid']
+#     bot_dict = aom.get_bot_dict(puid)
+#     if not bot_dict:
+#         return HttpResponse('no')
+#     bot_dict['date']=time.time()
+#     return HttpResponse('ok')
 
 
-@check_user
+# def analysis_result(request):
+#     puid = request.session['puid']
+#     bot = aom.get_bot_dict(puid)['bot']
+#     if not bot.result:
+#         return HttpResponse('没有分析好')
+#     else:
+#         # 以json格式将处理好的数据返回给前端
+#         data = json.dumps(bot.result)
+#         print(data)
+#         return HttpResponse(data)
+
+
+# @check_user
 def mainpage(request):
     print('这里是manpage....')
     if request.method ==  "GET":
-        puid = request.session.get('puid')
-        init_details_info = aom.init_details_info(puid)
-        # 如果获取到了用户的详细信息，则进入后台页面
-        if init_details_info:
-            debug.print_l('%s的签名为：%s'%(init_details_info['user_name'],init_details_info['signature']))
-            return render(request,'homepage/mainpage.html',init_details_info)
-        else:
-            return HttpResponseRedirect('/index/')  
+        user = request.session.get('user')
+        if user:
+            username = user.get('username')
+            if username:
+                # 如果获取到了管道,则使用管道里面的内容替换session
+                channels = ic.get_channels(username)
+                if channels and channels.channel_session.get('user'):
+                    user = channels.channel_session['user']
+                    ic.del_channels(username)
+                    request.session['user'] = user 
+                print("user",user)
+                puid = user['puid']
+                print("robots",rm.robots)
+                basic_data = rm.get_basic_data(puid)
+                # 如果获取到了用户的详细信息，则进入后台页面
+                if basic_data:
+                    debug.print_l('%s的签名为：%s'%(basic_data['user_name'],basic_data['signature']))
+                    # 初始化数据分析页面
+                    rm.start_data_analysis(puid,username)
+                    basic_data['username'] = username
+                    return render(request,'homepage/mainpage.html',basic_data)
+        return HttpResponseRedirect('/wx_init/')  
+
     elif request.method == "POST":
         # 获取puid
-        puid = request.session.get('puid')
-        # 获取用户信息
-        bot_dict = aom.get_bot_dict(puid)
-        # 获取用户的bot对象
-        bot = bot_dict.get('bot')  
+        puid = request.session["user"].get('puid')
+        # # 获取用户信息
+        # bot_dict = aom.get_bot_dict(puid)
+        # # 获取用户的bot对象
+        # bot = bot_dict.get('bot')  
+        bot = bm.get_bot(puid)
         # 获取是哪个nav-item
         content_page = request.POST.get('content_page')[1:]
         if content_page=="custom_plug":
@@ -95,33 +112,59 @@ def mainpage(request):
         elif content_page == "timed_transmission":
             # 调用定时发送函数
             pass
-
-def get_world_cloud(request):
-    if request.method =="GET":
-        # 获取puid
-        puid = request.session.get('puid')
-        # 获取用户信息
-        bot_dict = aom.get_bot_dict(puid)
-        # 获取用户的所有的对象
-        friends = bot_dict.get('bot').friends(update=True)
-        # 获取所有人的个性签名
-        signatures = {i.name:i.signature for i in friends }
-        # 创建词云分析线程
-        cloud_thread = helper.Create_world_cloud(signatures,'/home/tarena/WxRobot/homepage/static/img/color_mask.jpg')
-        return HttpResponse('ok')
-    elif request.method == "POST":
-        world_cloud = cloud_thread.get_bytes
-        if world_cloud:
-            return HttpResponse(world_cloud)
-        else:
-            return HttpResponse('no')
+#
+# def get_world_cloud(request):
+#     if request.method =="GET":
+#         # 获取puid
+#         puid = request.session.get('puid')
+#         # 获取用户信息
+#         bot_dict = aom.get_bot_dict(puid)
+#         # 获取用户的所有的对象
+#         friends = bot_dict.get('bot').friends(update=True)
+#         # 获取所有人的个性签名
+#         signatures = {i.name:i.signature for i in friends }
+#         # 创建词云分析线程
+#         cloud_thread = helper.Create_world_cloud(signatures,'/home/tarena/WxRobot/homepage/static/img/color_mask.jpg')
+#         return HttpResponse('ok')
+#     elif request.method == "POST":
+#         world_cloud = cloud_thread.get_bytes
+#         if world_cloud:
+#             return HttpResponse(world_cloud)
+#         else:
+#             return HttpResponse('no')
 
 def save_chat_config(request):
     friends = request.GET.get('friends')
     groups = request.GET.get('groups')
-    # models.
-    print('friends',friends)
-    print('groups',groups)
+    # print(friends,groups)
+    #
+    # # 获取puid
+    # puid = request.session.get('puid')
+    #
+    # wfriends = request.POST.getlist('wfriend')
+    # wgroups = request.POST.getlist('wgroup')
+    #
+    # wechat_id = models.WechatId.objects.filter(puid=puid).first()
+    # # 清空以前的数据
+    # wechat_id.selectedfriends_set.all().delete()
+    # wechat_id.selectedgroups_set.all().delete()
+    #
+    # # 增加提交的数据到数据库
+    # fcount = gcount = 0
+    # # 增加好友到数据库
+    # for name in wfriends:
+    #     models.SelectedFriends.objects.create(friend_name=name, wechat_id=wechat_id)
+    #     fcount += 1
+    # # 增加群聊到数据库
+    # for group in wgroups:
+    #     models.SelectedGroups.objects.create(group_name=group, wechat_id=wechat_id)
+    #     gcount += 1
+    # # print(len(wfriends),len(wgroups))
+    # # print(fcount,gcount)
+    # if (fcount == len(wfriends)) & (gcount == len(wgroups)):
+    #     return HttpResponse('ok')
+    # else:
+    #     return HttpResponse('no')
 
     return HttpResponse('ok')
 

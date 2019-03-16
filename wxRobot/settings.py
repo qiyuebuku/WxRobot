@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'login',
+    'databases',
+    'channels',
+    'initialize',
     'homepage',
-    'homepage.templatetags.intelligent_chat'
+    'logIntoRegister',
+    'helper',
 ]
 
 MIDDLEWARE = [
@@ -82,6 +85,7 @@ WSGI_APPLICATION = 'wxRobot.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+
 # mysql
 DATABASES = {
     'default': {
@@ -89,7 +93,9 @@ DATABASES = {
         'NAME': 'wxrobot',
         'USER': 'root',
         'PASSWORD': '123456',
-        'HOST':'localhost',
+        'HOST':'176.234.200.56',
+        # 'HOST':'192.168.1.101',
+        # 'HOST':'169.254.10.195',
         'PORT':'3306',
     }
 }
@@ -136,3 +142,14 @@ STATICFILES_DIRS=(
 )
 
 STATIC_URL = '/static/'
+
+# websocket
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'asgi_redis.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('localhost', 6379)],
+        },
+        'ROUTING': 'wxRobot.routing.channel_routing',
+    }
+}
