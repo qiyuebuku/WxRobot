@@ -5,6 +5,7 @@ import time
 from wxpy import *
 from helper import bot_manager as bm
 from helper.channels_manager import logged_channels as lc
+from databases import models
 # from wordcloud import WordCloud
 # import jieba
 # import matplotlib.pyplot as plt
@@ -93,37 +94,7 @@ class Active_object_manager(Thread):
         # 个性签名
         SIGNATURE = user_details.signature
 
-        # # 获取登陆者的好友和群组的详细信息
-        # groups = bot.groups(update = True)
-        # group_infos = []
-        # for group in groups:
-        #     group.update_group(True)
-        #
-        #     gname = group.name
-        #     # print("群名称：",gname)
-        #
-        #     gowner = group.owner.name  #群主
-        #     # print("群主：",gowner)
-        #
-        #     #所有群成员
-        #     members = group.members
-        #     # print("群内成员：",group.members)
-        #
-        #     # 统计性别
-        #     mtfratio = {'male':len(members.search(sex=MALE)),'female':len(members.search(sex=FEMALE)),'secrecy':len(members.search(sex=None))}
-        #     # print(mtfratio)
-        #
-        #     pcount = len(members)  #群成员数量
-        #     group_infos.append({'gname':gname,'gowner':gowner,'pcount':pcount,'mtfratio':mtfratio,'puid':group.puid})
-        #     # group_infos.append({'gname':gname,'gowner':gowner,'pcount':pcount,'puid':group.puid})
-        #
-        # friends = bot.friends(update=True)
-        # user_infos = []
-        # sex_dict = {0:'保密',1:'男',2:'女'}
-        # for friend in friends:
-        #     uname = friend.name
-        #     usex = sex_dict[friend.sex]
-        #     user_infos.append({'uname':uname,'usex':usex})
+       
 
         details = {
             'user_name': USER_NAME,
@@ -153,12 +124,12 @@ class Active_object_manager(Thread):
 
 
 class Data_analysis(Thread):
-    def __init__(self, Bot ,result_callback,username):
+    def __init__(self, Bot ,callback_analysis_result,username):
         super().__init__()
         self.Bot = Bot
         self.puid = Bot.user_details(Bot.self).puid
         self.Bot.result = None
-        self.result_callback = result_callback
+        self.callback_analysis_result = callback_analysis_result
         self.username = username
 
     def run(self):
@@ -190,7 +161,7 @@ class Data_analysis(Thread):
             'region': region
         }
         # print(result_data)
-        self.result_callback(result_data,self.username)
+        self.callback_analysis_result(result_data,self.username)
 
     def create_world_cloud(self, text, img_path):
         text = text
@@ -318,11 +289,11 @@ class Robot_management():
             数据分析入口函数
         """
         bot = self.get_bot(puid)
-        data_analysis = Data_analysis(bot,result_callback = self.result_callback,username = username)
+        data_analysis = Data_analysis(bot,self.callback_analysis_result,username = username)
         data_analysis.start()
 
 
-    def result_callback(self,data,username):
+    def callback_analysis_result(self,data,username):
         """
             数据分析完成后的回调函数
         """
@@ -330,9 +301,109 @@ class Robot_management():
        
         channel.reply_channel.send({
             'text': json.dumps({
-                'result_data':data
+                'analysis_result':data
             })
         })
+
+
+    def get_data_intelligent(self,puid,username,data_intelligent=None):
+        """
+            同步的方式获取好友和群组信息
+        """
+
+        #已被选中的好友
+        select_friends =[f.fid for f in models.SelectedFriends.objects.all()]  
+
+        #已被选中的群组
+        select_groups = [g.gid for g in models.SelectedGroups.objects.all()] 
+
+        print(dir(select_friends),select_groups,sep="\n")
+
+        
+
+
+        print("正在：同步的方式获取好友和群组信息")
+        bot = self.get_bot(puid)
+        # 获取登陆者的好友和群组的详细信息
+        groups = bot.groups(update = True)
+        group_infos = []
+        for group in groups:
+            group.update_group(True)
+        
+            gname = group.name
+            # print("群名称：",gname)
+        
+            gowner = group.owner.name  #群主
+            # print("群主：",gowner)
+        
+            #所有群成员
+            members = group.members
+            # print("群内成员：",group.members)
+        
+            # 统计性别
+            mtfratio = {'male':len(members.search(sex=MALE)),'female':len(members.search(sex=FEMALE)),'secrecy':len(members.search(sex=None))}
+            # print(mtfratio)
+
+            selected = True if group.puid in select_groups else False
+            # print("group_selected:",selected)
+            pcount = len(members)  #群成员数量
+            group_infos.append({'gname':gname,'gowner':gowner,'pcount':pcount,'mtfratio':mtfratio,'puid':group.puid,'selected':selected})
+            
+            # group_infos.append({'gname':gname,'gowner':gowner,'pcount':pcount,'puid':group.puid})
+        
+        friends = bot.friends(update=True)
+        user_infos = []
+        sex_dict = {0:'保密',1:'男',2:'女'}
+        for friend in friends:
+            uname = friend.name
+            usex = sex_dict[friend.sex]
+            puid = friend.puid
+            selected = True if friend.puid in select_friends else False
+            # print("friend_selected",selected)
+            user_infos.append({'uname':uname,'usex':usex,'puid':friend.puid,'selected':selected})
+
+
+        
+
+        ug_detail_info={'user_info':user_infos,'group_info':group_infos}
+        # 如果回调函数不为空，则调用回调函数
+        if data_intelligent:
+            print("调用回调函数返回：data_intelligent")
+            data_intelligent(ug_detail_info,username)
+        #直接返回
+        else:
+            print("直接返回：data_intelligent")
+            return ug_detail_info
+
+    def start_data_intelligent(self,puid,username):
+        """
+            异步的方式获取好友和群组数据
+            return : 通过回调函数＂callback_data_intelligent＂反馈结果，参数为：data,username
+        """
+        # 创建线程
+        data_intelligent = Thread(
+            target=self.get_data_intelligent,
+            args=(
+                puid,username,
+                self.callback_data_intelligent
+        ))
+        data_intelligent.start()
+        print('启动：start_data_intelligent')
+
+    def callback_data_intelligent(self,data,username):
+        """
+            数据分析完成后的回调函数
+        """
+        channel = lc.get_channels(username=username)
+       
+        channel.reply_channel.send({
+            'text': json.dumps({
+                'intelligent_result':data
+            })
+        })
+        
+
+       
 
 
 
@@ -344,6 +415,7 @@ class Robot_management():
                 * 机器人的uuid号
             :param bot
         """
+
         self.robots[puid] = bot
 
     def get_bot(self, puid):

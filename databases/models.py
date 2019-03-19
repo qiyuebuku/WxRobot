@@ -7,12 +7,14 @@ from django.db import models
 
 
 class SelectedGroups(models.Model):
-    group_name = models.CharField(max_length=32)
+    # group_name = models.CharField(max_length=32)
+    gid = models.CharField(max_length=16,primary_key=True)
     wechat_id = models.ForeignKey('WechatId',on_delete=models.CASCADE)
 
 
 class SelectedFriends(models.Model):
-    friend_name = models.CharField(max_length=32)
+    # friend_name = models.CharField(max_length=32)
+    fid = models.CharField(max_length=16,primary_key=True)
     wechat_id = models.ForeignKey('WechatId',on_delete=models.CASCADE)
 
 class WechatId(models.Model):

@@ -121,22 +121,30 @@
         socket.onmessage = function message(event) {
             var data = JSON.parse(event.data);
             console.log('接收到消息', data)
+
+            
             if (data['init_status']) {
                 console.log('登录成功')
                 alert(data['info']);
                 window.location = "/mainpage";
-            } else if (data['init_status'] == false) {
+            } 
+
+            else if (data['init_status'] == false) {
                 console.log('登陆失败')
                 alert(data['error']);
-            } else if (data['qrcode']) {
+            } 
+
+            else if (data['qrcode']) {
                 var src = "data:image/jpeg;base64," + data['qrcode'];
                 $('#img_page').attr('src', src);
             }
+
             else {
                 var username = encodeURI(data['username']);
                 if (data['is_logged_in']) {
                     // user.html(username + ': 在线');
                 }
+
                 else {
                     // user.html(username + ': 离线');
                 }

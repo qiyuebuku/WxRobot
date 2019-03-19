@@ -3,27 +3,6 @@ update_avatar();
 // 签名
 update_signature();
 
-// // 获取数据分析结果
-// var update_analysis = setInterval(update_analysis,5000);
-// function update_analysis(){
-//     $.ajax({
-//         url: '/analysis_result/',
-//         type: 'get',
-//         headers:{ "X-CSRFToken": '{{ csrf_token }}'},  
-//         success:function(arg){
-            
-//             if (arg!="没有分析好")
-//             {
-//                 clearInterval(update_analysis);
-//                 var data = JSON.parse(arg);
-//                 console.log(data);
-//                 $('#loading-body').attr('style','display:none');
-//                 $('#loading-body').next().removeClass('hidden');
-//                 update_analysis_page(data);
-//             }
-//         }   
-//     })
-// }
 
 
 function update_analysis_page(data){

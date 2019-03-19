@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
 } */
-#loading-body{
+#loading-data-analysis,#loading-intelligent-chat{
     margin: 0;
     /* 设置div元素的高度为当前窗口高度-100px */
     height: calc(100vh - 100px);    

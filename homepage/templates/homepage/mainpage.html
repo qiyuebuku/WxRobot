@@ -653,7 +653,7 @@
                 </div>
             </div>
             <div class="content tab-pane fade in active" id="data_analysis">
-                <div id="loading-body">
+                <div id="loading-data-analysis"　class="loading-body">
                     <div class="container">
                         <span class="girl"></span>
                         <div class="boys">
@@ -1114,6 +1114,18 @@
             </div>
 
             <div class="content tab-pane fade " id="intelligent_chat">
+                <div id="loading-intelligent-chat"　class="loading-body">
+                    <div class="container">
+                        <span class="girl"></span>
+                        <div class="boys">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                        
                 <div class="container-fluid">
                     <h4 class="page-title">智能聊天</h4>
                     <div class="row">
@@ -1131,20 +1143,11 @@
                                         <button class="btn btn-sm btn-info" data-toggle="modal" id="ilt-config"
                                                 data-target="#friend-selection-box">config
                                         </button>
-
-
-                                        <!-- <button class="btn btn-success">Success</button>
-
-                                                <button class="btn btn-warning">Warning</button>
-
-                                                <button class="btn btn-danger">Danger</button>
-
-                                                <button class="btn btn-link">Link</button> -->
                                     </p>
                                 </div>
                             </div>
                         </div>
-{#                        已选中的好友和群组#}
+<!-- {#                        已选中的好友和群组#} -->
                         <div class="col-md-12 authorized_object">
                             <div class="card">
                                 <div class="card-header">
@@ -1436,7 +1439,7 @@
                                     <div class="card-body ">
                                         <div class="table-full-width">
                                             <table class="table">
-                                                <thead>
+                                                <thead id="friend-box-info">
                                                 <tr>
                                                     <th>
                                                         <div class="form-check">
@@ -1453,32 +1456,8 @@
                                                     <th>操作</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                {% for friend in ug_detail_info.user_info %}
-                                                    <tr>
-                                                        <td>
-                                                            <div class="form-check">
-                                                                <label class="form-check-label">
-                                                                    <input class="form-check-input friends-select"
-                                                                           type="checkbox">
-                                                                    <span class="form-check-sign"></span>
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <input type="hidden" name="abvcfd">
-                                                        <td>{{ friend.uname }}</td>
-                                                        <td>{{ friend.usex }}</td>
-                                                        <td class="td-actions">
-                                                            <div class="form-button-action">
-                                                                <button type="button" data-toggle="tooltip"
-                                                                        title="Remove"
-                                                                        class="btn btn-link btn-simple-danger">
-                                                                    <i class="la la-times"></i>
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                {% endfor %}
+                                                <tbody id="friends_info">
+                                                    
                                                 </tbody>
                                             </table>
                                         </div>
@@ -1524,7 +1503,7 @@
                                                     <th>操作</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody id="group-box-info">
                                                 {% for group in  ug_detail_info.group_info %}
                                                     <tr>
                                                         <td>
@@ -1602,10 +1581,6 @@
                         </li>
                     </ul>
                 </nav>
-                <div class="copyright ml-auto">
-                    2018, made with <i class="la la-heart heart text-danger"></i> by <a href="#">ThemeKita</a> -
-                    More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> -
-                    Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></div>
             </div>
         </footer>
     </div>
@@ -1657,10 +1632,10 @@
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=rij8VHia6LycEdbLzhjq5ecze4DW9gXG"></script>
 <script type="text/javascript" src="{% static 'js/echarts/bmap.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/echarts/simplex.js' %}"></script>
-<script src="{% static 'js/ready.min.js' %}"></script>
-<script src="{% static 'js/base.js' %}"></script>
-<script src="{% static 'js/intelligent_chat.js' %}"></script>
-<script src="{% static 'js/custom_plug.js' %}"></script>
-<script src="{% static 'js/data_analysis.js' %}"></script>
+<script src="{% static 'js/ready.min.js' %}?ver=1"></script>
+<script src="{% static 'js/data_analysis.js' %}?ver=1"></script>
+<script src="{% static 'js/base.js' %}?ver=1"></script>
+<script src="{% static 'js/custom_plug.js' %}?ver=1"></script>
+<script src="{% static 'js/intelligent_chat.js' %}?ver=1"></script>
 
 </html>

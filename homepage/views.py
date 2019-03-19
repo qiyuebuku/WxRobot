@@ -8,7 +8,7 @@ from wxpy import *
 from databases import models
 from helper.bot_manager import robot_management as rm 
 from helper.channels_manager import initialize_channels as ic
-
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 # 用户管理对象
@@ -83,6 +83,7 @@ def mainpage(request):
                     debug.print_l('%s的签名为：%s'%(basic_data['user_name'],basic_data['signature']))
                     # 初始化数据分析页面
                     rm.start_data_analysis(puid,username)
+                    rm.start_data_intelligent(puid,username)
                     basic_data['username'] = username
                     return render(request,'homepage/mainpage.html',basic_data)
         return HttpResponseRedirect('/wx_init/')  
@@ -132,10 +133,32 @@ def mainpage(request):
 #             return HttpResponse(world_cloud)
 #         else:
 #             return HttpResponse('no')
-
+@csrf_exempt
 def save_chat_config(request):
-    friends = request.GET.get('friends')
-    groups = request.GET.get('groups')
+    friends = request.POST.get('friends')
+    groups = request.POST.get('groups')
+    wechat_id = models.WechatId.objects.filter(puid = request.session['user'].get('puid')).first()
+    friends = json.loads(friends)
+    groups = json.loads(groups)
+
+
+    models.SelectedFriends.objects.filter(wechat_id = wechat_id).delete()
+    models.SelectedGroups.objects.filter(wechat_id = wechat_id).delete()
+
+    #好友
+    for f in friends:
+        fid = f['fid']
+        models.SelectedFriends.objects.update_or_create(fid=fid,wechat_id = wechat_id)
+        # models.SelectedFriends.objects.create(fid=fid,friend_name=friend_name,wechat_id = wechat_id)
+
+    #群组
+    for g in groups:
+        gid = g['gid']
+        models.SelectedGroups.objects.update_or_create(gid=gid,wechat_id = wechat_id)
+
+
+
+
     # print(friends,groups)
     #
     # # 获取puid
