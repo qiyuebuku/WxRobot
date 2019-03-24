@@ -50,37 +50,31 @@ $(function () {
     }
 
 
-
     //好友选择框的数据更新
     function set_friend_box_info(intelligent_result){
         // 将后端获取到的数据，填充到好友选择框
         let userinfo = intelligent_result['user_info'];
         for(var i=0; i<userinfo.length; i++){
             let info = $('<tr>'+
-                            '<td>'+
+                            '<input type="hidden" name="'+userinfo[i].puid+'">'+
+                            '<td>'+userinfo[i].uname+'</td>'+
+                            '<td>'+userinfo[i].usex+'</td>'+
+                            '<td class="td-actions" >'+
                                 '<div class="form-check">'+
                                     '<label class="form-check-label">'+
-                                        '<input class="form-check-input friends-select friend-item" onchange="set_friends_tag();" type="checkbox">'+
+                                        '<input class="form-check-input friends-select friend-item" value="'+userinfo[i].puid+'" onchange="set_friends_status(this);" type="checkbox">'+
                                         '<span class="form-check-sign"> </span>'+
                                     '</label>'+
                                 '</div>'+
                             '</td>'+
-                            '<input type="hidden" name="'+userinfo[i].puid+'">'+
-                            '<td>'+userinfo[i].uname+'</td>'+
-                            '<td>'+userinfo[i].usex+'</td>'+
-                            '<td class="td-actions">'+
-                                '<div class="form-button-action">'+
-                                    '<button type="button" data-toggle="tooltip " title="" class="btn btn-link btn-simple-danger ">'+
-                                    '<i class="la la-times">  </i>'+
-                                    '</button>'+
-                                '</div>'+
-                            '</td>'+
                         '</tr>')
 
-            info.find('input:first').prop('checked',
+            info.find('.form-check-input').prop('checked',
                 userinfo[i].selected?true:false
             );
-            $('#friends_info').append(info);
+            
+            info.append('<input type="checkbox" checked data-toggle="toggle" data-onstyle="primary" data-style="btn-round">')
+            $('#friends_info').append(info)
         }
 
         // 将后端获取到的数据，填充到群组选择框
@@ -88,71 +82,93 @@ $(function () {
         for(var i=0; i<groupinfo.length; i++){
             
             let info = $('<tr>'+
-                            '<td>'+
-                                '<div class="form-check">'+
-                                    '<label class="form-check-label">'+
-                                        '<input class="form-check-input groups-select" onchange="set_groups_tag();" type="checkbox">'+
-                                        '<span class="form-check-sign"> </span>'+
-                                    '</label>'+
-                                '</div>'+
-                            '</td>'+
                             '<input type="hidden" name="'+groupinfo[i].puid+'">'+
                             '<td>'+groupinfo[i].gname+'</td>'+
                             '<td>'+groupinfo[i].gowner+'</td>'+
                             '<td>'+groupinfo[i].pcount+'</td>'+
                             '<td>'+groupinfo[i].mtfratio.male+'/'+groupinfo[i].mtfratio.female+'/'+groupinfo[i].mtfratio.secrecy+'</td>'+
-                            '<td class="td-actions">'+
-                                '<div class="form-button-action">'+
-                                    '<button type="button" data-toggle="tooltip" title="Remove" class="btn btn-link btn-simple-danger">'+
-                                        '<i class="la la-times"> </i>'+
-                                    '</button>'+
+                            '<td>'+
+                                '<div class="form-check">'+
+                                    '<label class="form-check-label">'+
+                                        '<input class="form-check-input groups-select" onchange="set_groups_status(this);" type="checkbox">'+
+                                        '<span class="form-check-sign"> </span>'+
+                                    '</label>'+
                                 '</div>'+
                             '</td>'+
                     '</tr>')
-            info.find('input:first').prop('checked',
+            info.find('.form-check-input').prop('checked',
                 groupinfo[i].selected?true:false
             );
-            $("#group-box-info").append(info);
+            $("#groups_info").append(info);
         }
 
         // 更新好友选择框已选择好友和已选择群组
-        set_friends_tag();
-        set_groups_tag();
-
-        // // 更新智能聊天页面的已选择好友和已选择群组
-        var select_friends = $('#checked_friends').children('span');
-        var select_groups = $('#checked_groups').children('span');
-        var g = $('.authorized_object .card-body .select_groups');
-        $('.authorized_object .card-body .select_groups').html(select_groups);
-        $('.authorized_object .card-body .select_friends').html(select_friends);
-         // 更新好友选择框已选择好友和已选择群组
-         set_friends_tag();
-         set_groups_tag();
+        // set_friends_tag();
+        // set_groups_tag();
+        set_select();
         
     }
 
 
 });
 
-// // 10秒汇报一次心跳
-// open_heart(10000);
-// function open_heart(timeout) {
-//     var ref = setInterval(function () {
-//         $.ajax({
-//             url: '/Heart_rate_response/',
-//             type: 'get',
-//             // data: { 'puid':"{{puid}}" },
-//             headers: { "X-CSRFToken": '{{ csrf_token }}' },
-//             success: function (arg) {
-//                 console.log(arg);
-//                 if (arg != 'ok') {
-//                     $(location).attr('href', '/index/');
-//                 }
-//             }
-//         })
-//     }, timeout);
-// }
 
+// 将已经选中的好友和群组显示到前端上
+function set_select(){
+    let friends_array_html= new Array;
+    let groups_array_html = new Array;
+    let span_index = 0;
+    var groups_span_style = [
+        'badge-count',
+        'badge-default',
+        'badge-primary',
+        'badge-info',
+        'badge-success',
+        'badge-warning',
+        'badge-danger'
+    ]
+    var friend_span_style = {
+        '男':"badge-default",
+        '女':" badge-danger",
+        '保密':"badge-success"
+    }
+
+    $('#friends_info .form-check-input:checked').each(function () {
+        var siblings = $(this).parents('td').siblings();
+        let puid = $(siblings[0]).attr('name');
+        // 获取好友名称
+        var uname = $(siblings[1]).text();
+        // 获取好友性别
+        var sex = $(siblings[2]).text();
+        let label = $("<span class='friends badge "+friend_span_style[sex]+"' name='" + puid + "'>" + uname + "</span>");
+        friends_array_html.push(label)
+        is_all($(this));
+    });
+
+
+    // 遍历所有已被选中的群组，为其在已选中群组的添加标签。
+    $('#groups_info .form-check-input:checked').each(function () {
+        var siblings = $(this).parents('td').siblings();
+        var puid = $(siblings[0]).attr('name');
+        // 获取群组名称
+        var gname = $(siblings[1]).text(); // group name
+        var gowner = $(siblings[2]).text(); // group owner
+        var pcount = $(siblings[3]).text(); // people count
+        var mtfratio = $(siblings[4]).text(); //male to female ratio 
+        //创建群标签
+        var label = $('<span class="groups badge ' + groups_span_style[span_index] + '"name="' + puid + '">' + gname + '<span class="badge">' + pcount + '</span> </span>')
+        // 当将所有的群组样式都是用完毕后，将其下标归零
+        if (++span_index >= 7) {
+            span_index = 0;
+        }
+        groups_array_html.push(label);
+    });
+
+    save_select_config("friends",friends_array_html);
+    save_select_config("groups",groups_array_html);
+
+
+}
 
 // 给用户所点击的菜单，加上样式
 $('#my_tab').children(".nav-item:not('.update-pro')").click(function (e) {

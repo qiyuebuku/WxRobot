@@ -47,7 +47,8 @@ class BotThread(Thread):
             self.bot.enable_puid('wxpy_puid.pkl')
             self.e_bot.set()
         except KeyError as e:
-            channel = ic.get_channels(self.username)
+            username = self.request.session['user'].get('username')
+            channel = ic.get_channels(username)
             channel.reply_channel.send({
                 'text': json.dumps({
                     'init_status': False,

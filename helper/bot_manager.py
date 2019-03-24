@@ -13,115 +13,6 @@ from databases import models
 # from PIL import Image
 
 
-class Active_object_manager(Thread):
-    def __init__(self, *, beat_timeout=60, inspection_interval=10):
-        """
-        :param beat_timeout 心跳的超时时间
-        :param inspection_interval 检测间隔时间
-        """
-
-        super().__init__()
-        self.has_logged = {}
-        self.beat_timeout = beat_timeout
-        self.inspection_interval = inspection_interval
-
-    def run(self):
-        """
-            将心跳超时且没有开启任何功能的用户踢出去
-        """
-        while True:
-            has_logged = self.has_logged
-            current_time = time.time()
-            cleaner_uuid = []
-            for puid in has_logged:
-                # 将当前时间退回到30秒前，依次和每个对象最近一次汇报心跳的时间作对比
-                # 如果大于他，说明这个对象的汇报超时了，则将其踢出
-                if self.has_logged[puid]['date'] < (current_time-self.beat_timeout):
-                    print('上次汇报时间：', time.ctime(self.has_logged[puid]['date']))
-                    print('当前时间：', time.ctime(current_time))
-                    print('puid:%s，心跳超时%s秒' % (
-                        puid, (current_time-self.beat_timeout-self.has_logged[puid]['date'])))
-                    cleaner_uuid.append(puid)
-
-            for puid in cleaner_uuid:
-                if self.cleaner(puid):
-                    print('将%s从字典清理完成' % puid)
-            time.sleep(self.inspection_interval)
-
-    def cleaner(self, bot_puid):
-        try:
-            # 从字典当中删除
-            self.has_logged[bot_puid]['bot'].logout()
-            del self.has_logged[bot_puid]
-            return True
-        except Exception as e:
-            print('将%s从监控字典清理失败，失败原因：%s' % (bot_puid, e))
-            return False
-
-    def get_bot_dict(self, bot_puid):
-        try:
-            # 获取机器人对象
-            bot_dict = self.has_logged[bot_puid]
-            # print(bot_dict)
-        except (KeyError, AttributeError,):
-            return None
-        return bot_dict
-
-    def init_details_info(self, bot_puid):
-        """
-        初始化登陆者的详细信息
-        :param bot_uuid 机器人的uuid标识符
-        :return 名称、头像，微信ID
-        # """
-        # bot_dict = self.get_bot_dict(bot_puid)
-        if not bot_dict:
-            return None
-        bot = bot_dict.get('bot')
-        # 获取登陆者的详细信息
-        user_details = bot.user_details(bot.self)
-        # 微信名称
-        USER_NAME = user_details.name
-        # 微信头像
-        AVATAR_BYTES = base64.b64encode(user_details.get_avatar()).decode()
-        # 微信ID号
-        WXID = user_details.wxid
-        # 性别
-        SEX = user_details.sex
-        # 省份
-        PROVINCE = user_details.province
-        # 城市
-        CITY = user_details.city
-        # 个性签名
-        SIGNATURE = user_details.signature
-
-       
-
-        details = {
-            'user_name': USER_NAME,
-            'avatar': AVATAR_BYTES,
-            'wxid': WXID,
-            'status': '正常',
-            'sex': SEX,
-            'province': PROVINCE,
-            'city': CITY,
-            'signature': SIGNATURE,
-            # 'ug_detail_info':{'user_info':user_infos,'group_info':group_infos}
-        }
-        return details
-
-    def add_logged(self, bot):
-        puid = bot.user_details(bot.self).puid
-        self.has_logged[puid] = {'bot': bot, 'date': time.time()}
-        print('开始数据分析')
-        # 开始数据分析
-        t = Data_analysis(bot)
-        t.start()
-
-
-# aom = Active_object_manager(beat_timeout=60)
-# aom.setDaemon(True)
-# aom.start()
-
 
 class Data_analysis(Thread):
     def __init__(self, Bot ,callback_analysis_result,username):
@@ -137,7 +28,7 @@ class Data_analysis(Thread):
         friends = self.Bot.friends(update=True)
 
         # 获取好友的数量
-        friends_count = len(friends)
+        friends_count = len(friends[1:])
         # 获取群聊数量
         # 一些不活跃的群可能无法被获取到，可通过在群内发言，或修改群名称的方式来激活
         groups_count = len(self.Bot.groups(update=True))
@@ -160,7 +51,7 @@ class Data_analysis(Thread):
             'gender_statistics': gender_statistics,
             'region': region
         }
-        # print(result_data)
+        print(result_data)
         self.callback_analysis_result(result_data,self.username)
 
     def create_world_cloud(self, text, img_path):
@@ -288,6 +179,7 @@ class Robot_management():
         """
             数据分析入口函数
         """
+        print("开始进行数据分析")
         bot = self.get_bot(puid)
         data_analysis = Data_analysis(bot,self.callback_analysis_result,username = username)
         data_analysis.start()
@@ -298,7 +190,7 @@ class Robot_management():
             数据分析完成后的回调函数
         """
         channel = lc.get_channels(username=username)
-       
+        print('callback_analysis_result')
         channel.reply_channel.send({
             'text': json.dumps({
                 'analysis_result':data
@@ -351,7 +243,7 @@ class Robot_management():
             
             # group_infos.append({'gname':gname,'gowner':gowner,'pcount':pcount,'puid':group.puid})
         
-        friends = bot.friends(update=True)
+        friends = bot.friends(update=True)[1:]
         user_infos = []
         sex_dict = {0:'保密',1:'男',2:'女'}
         for friend in friends:
@@ -362,8 +254,6 @@ class Robot_management():
             # print("friend_selected",selected)
             user_infos.append({'uname':uname,'usex':usex,'puid':friend.puid,'selected':selected})
 
-
-        
 
         ug_detail_info={'user_info':user_infos,'group_info':group_infos}
         # 如果回调函数不为空，则调用回调函数
@@ -403,10 +293,6 @@ class Robot_management():
         })
         
 
-       
-
-
-
     # 增加需要被管理的机器人
     def add_bot(self, puid, bot):
         """
@@ -419,7 +305,10 @@ class Robot_management():
         self.robots[puid] = bot
 
     def get_bot(self, puid):
-        return self.robots[puid]
+        try:
+            return self.robots[puid]
+        except:
+            return None
 
 
     def del_bot(self,puid):
@@ -428,6 +317,32 @@ class Robot_management():
 
 
 robot_management = Robot_management()
+
+
+
+
+
+def intelligent_chat(bot,friends = None,groups = None):
+    auto_list = friends.extend(groups)
+    print("auto_list",friends)
+    @bot.register(friends)
+    def group_message(msg):
+        print('[接收]' + str(msg))
+
+        if (msg.type != 'Text'):
+            ret = '[奸笑][奸笑]'
+        else:
+            ret = auto_ai(msg.text)
+        print('[发送]' + str(ret))
+        return ret
+
+def off_smart_chat():
+        pass     
+
+
+
+
+    
 
 
 

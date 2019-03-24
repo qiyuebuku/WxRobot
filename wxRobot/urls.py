@@ -31,4 +31,5 @@ urlpatterns = [
     path('save_chat_config/',homepage_views.save_chat_config),
     path('mainpage/',homepage_views.mainpage),
     path('test/',homepage_views.test),
+    path('intelligent_switch/',homepage_views.intelligent_switch),
 ]
