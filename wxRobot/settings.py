@@ -94,7 +94,7 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': '123456',
         # 'HOST':'176.234.200.56',
-        'HOST':'192.168.1.103',
+        'HOST':'192.168.43.151',
         'PORT':'3306',
     }
 }
@@ -122,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans'
 
 TIME_ZONE = 'UTC'
 

@@ -185,7 +185,6 @@ function save_select_config(model,array_html){
 
 
 function is_all(self){
-    console.log("is_all")
     let all = $(self).parents('tbody').prev().children().find('.select-all-checkbox');
     let select_length = 0;
     let input_all = $(self).parents('tr').siblings().children().find('.form-check-input');

@@ -14,10 +14,20 @@ from databases import models
 
 
 
+
+class Plugs_management():
+    pass 
+
+
+
+
+
+
+
 class Data_analysis(Thread):
     def __init__(self, Bot ,callback_analysis_result,username):
         super().__init__()
-        self.Bot = Bot
+        self.Bot = Bot 
         self.puid = Bot.user_details(Bot.self).puid
         self.Bot.result = None
         self.callback_analysis_result = callback_analysis_result
@@ -51,7 +61,7 @@ class Data_analysis(Thread):
             'gender_statistics': gender_statistics,
             'region': region
         }
-        print(result_data)
+        # print(result_data)
         self.callback_analysis_result(result_data,self.username)
 
     def create_world_cloud(self, text, img_path):
@@ -145,18 +155,24 @@ class Robot_management():
     def __init__(self):
         self.robots = {}
 
-    def get_basic_data(self, puid):
+    def get_basic_data(self, puid , username):
         """
         初始化登陆者的详细信息
         :param bot_uuid 机器人的uuid标识符
         :return 名称、头像，微信ID
         """
         # bot_dict = self.get_bot_dict(bot_puid)
-        bot = self.robots.get(puid)
+        bot = self.get_bot(puid)
         if not bot:
             return None 
+        print("get_bot:-----------------------------",bot)
         # 获取登陆者的详细信息
         user_details = bot.user_details(bot.self)
+
+        # 获取插件用户所拥有插件信息                                               
+        plug_querys = models.UserInfo.objects.filter(username = username).first().userplugs_set.all()
+        user_plugs = [plug_query for plug_query in plug_querys if plug_query.plug.isActive]
+        print("plugs",user_plugs)
         details={
         # 微信名称
             'user_name':user_details.name,
@@ -172,6 +188,10 @@ class Robot_management():
             'city' : user_details.city,
         # 个性签名
             'signature' : user_details.signature,
+        # 用户的插件
+            'user_plugs':user_plugs,
+        # 当前登录的用户名
+            'username':username,
         }
         return details
 
@@ -209,7 +229,7 @@ class Robot_management():
         #已被选中的群组
         select_groups = [g.gid for g in models.SelectedGroups.objects.all()] 
 
-        print(dir(select_friends),select_groups,sep="\n")
+        # print(dir(select_friends),select_groups,sep="\n")
 
         
 
@@ -284,60 +304,156 @@ class Robot_management():
         """
             数据分析完成后的回调函数
         """
+        # print(data,username)
         channel = lc.get_channels(username=username)
-       
+
         channel.reply_channel.send({
             'text': json.dumps({
                 'intelligent_result':data
             })
         })
+    
+
+
         
 
     # 增加需要被管理的机器人
-    def add_bot(self, puid, bot):
+    def add_bot(self, puid, bot ,username):
         """
             用于将需要被管理的机器人线程加入进来
             :param bot_uuid 
                 * 机器人的uuid号
             :param bot
         """
+        fs = Functional_scheduler(bot,username)
+        fs.setDaemon(True)
+        fs.start()
+        self.robots[puid] =[bot,fs]
 
-        self.robots[puid] = bot
+
+
 
     def get_bot(self, puid):
         try:
-            return self.robots[puid]
+            print("get_bot------------------------",self.robots[puid][0])
+            return self.robots[puid][0]
         except:
             return None
 
+    def get_fs(self,puid):
+        try:
+            return self.robots[puid][1] 
+        except:
+            return None 
 
     def del_bot(self,puid):
         del self.robots[puid]
 
+    
 
 
 robot_management = Robot_management()
 
 
 
+class Functional_scheduler(Thread):
+    def __init__(self,bot,username):
+        super().__init__()
+        self.bot = bot 
+        self.username = username
+        self.friends = []
+        self.groups = []
+        self.select_function = {}
+        tuling = Tuling(api_key='91bfe84c2b2e437fac1cdb0c571cac91')
+
+    def run(self):
+        self.functional_scheduler()
+
+    def functional_scheduler(self):
+        bot = self.bot  
+        friends = self.friends 
+        groups = self.groups 
+
+   
+
+        @bot.register(self.friends)
+        def friends_message(msg):
+            print('[接收来自好友：]' + str(msg))
+            if (msg.type != 'Text'):
+                ret = '[奸笑][奸笑]'
+            else:
+                print('准备调用图灵')
+                ret = self.tuling.do_reply(msg)
+                print("ret",ret)
+            print('[发送]' + str(ret))
+            return ret
+
+        @bot.register(self.groups)
+        def group_message(msg):
+            print('[接收来自群聊：]' + str(msg))
+            if msg.is_at:
+                if (msg.type != 'Text'):
+                    ret = '[奸笑][奸笑]'
+                else:
+                    ret = self.tuling.reply_text(msg)
+                    print("ret",ret)
+
+                print('[发送]' + str(ret))
+                return ret
 
 
-def intelligent_chat(bot,friends = None,groups = None):
-    auto_list = friends.extend(groups)
-    print("auto_list",friends)
-    @bot.register(friends)
-    def group_message(msg):
-        print('[接收]' + str(msg))
+    def refresh_listening_obj(self,puid):
+        print('================----------------================')
+        bot = robot_management.get_bot(puid)
+        print(puid,bot,sep='\n')
 
-        if (msg.type != 'Text'):
-            ret = '[奸笑][奸笑]'
-        else:
-            ret = auto_ai(msg.text)
-        print('[发送]' + str(ret))
-        return ret
+        # 获取所有的好友和群组对象
+        friends = bot.friends()   #获取更新好友列表
+        groups = bot.groups()
 
-def off_smart_chat():
-        pass     
+        # 从数据库中获取所有已经被选中的好友和群组puid
+        m_friends = models.SelectedFriends.objects.all()
+        m_groups = models.SelectedGroups.objects.all()
+
+        # 用从数据库中查找出已被选中的好友或者群组Puid获取对应的对象
+        select_friends = []
+        select_groups = []
+
+        # 清空上一次的选中的内容
+        self.friends.clear() 
+        self.groups.clear()
+        # 两种方法，列表生成式和普通遍历
+        # self.friends = [friends.search(puid == f.puid) for f in m_friends if friends.search(puid == f.puid)]
+        for f in m_friends:
+            friend = friends.search(puid =f.fid)
+            if friend and friend[0] not in self.friends:
+                print("添加好友：",friend[0])
+                self.friends.append(friend[0])
+        # self.groups = [groups.search(puid == g.puid) for g in m_groups if groups.search(puid == g.puid)]
+        for g in m_groups:
+            group = groups.search(puid =g.gid)
+            if group and groups[0] not in self.groups:
+                print("添加群聊：",group[0])
+                self.groups.append(group[0])
+        # print(self.friends,self.groups,sep="\n")
+
+        
+
+    def refresh_function(self):
+        # 获取插件用户所拥有插件信息                                               
+        plug_querys = models.UserInfo.objects.filter(username = self.username).first().userplugs_set.filter(isActive=True)
+        # 清空所有原先功能状态
+        self.select_function.clear()
+        for plug_query in plug_querys:
+            if not plug_query.plug.isActive:
+                continue
+            plug = plug_query.plug
+            self.select_function[plug.wake_word] = {'name':plug.ptitle,'plug_path':plug.plug_path}
+
+        print("select_function",self.select_function)
+
+
+
 
 
 

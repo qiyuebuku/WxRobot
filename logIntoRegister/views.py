@@ -23,7 +23,7 @@ def login(request):
             wechats= user_info.wechatid_set.all()  # 获取所有的用户
             if wechats:
                 for wechat in wechats:
-                    if wechat.status:
+                    if wechat.isActive:
                         request.session['user']={
                             'username':username,
                             'prefsession':True,

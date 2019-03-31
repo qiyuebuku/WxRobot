@@ -117,7 +117,7 @@ class BotThread(Thread):
             # 获取初始化的微信头像和名称以及puid
             data, puid = self.bot_puid(self.bot)
             # 添加到登录成功字典里
-            rm.add_bot(puid,self.bot)
+            rm.add_bot(puid,self.bot,username)
             
             # 查找当前帐号下所绑定的微信号
             user = models.UserInfo.objects.filter(
@@ -130,7 +130,7 @@ class BotThread(Thread):
             if not wechat:
                 models.WechatId.objects.create(
                     puid = puid,
-                    status = True,
+                    isActive = True,
                     user_info_id = user.id
                     )
                 print('为%s添加微信：%s' %(username,puid))
@@ -138,7 +138,7 @@ class BotThread(Thread):
             else:
                 # 设置为在线状态
                 # models.WechatId.object.filter()
-                wechat.status = True 
+                wechat.isActive = True 
                 wechat.save()
                 print('%s的微信已经存在'%username)
 
