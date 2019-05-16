@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*     Slider     */
 
 .slider-default .ui-slider-range {
@@ -22,4 +23,30 @@
 
 .slider-danger .ui-slider-range {
   background: $danger-color;
+=======
+/*     Slider     */
+
+.slider-default .ui-slider-range {
+  background: $default-color;
+}
+
+.slider-primary .ui-slider-range {
+  background: $primary-color;
+}
+
+.slider-info .ui-slider-range {
+  background: $info-color;
+}
+
+.slider-success .ui-slider-range {
+  background: $success-color;
+}
+
+.slider-warning .ui-slider-range {
+  background: $warning-color;
+}
+
+.slider-danger .ui-slider-range {
+  background: $danger-color;
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
 }

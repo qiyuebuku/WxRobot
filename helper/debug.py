@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 import inspect
 import ctypes
 
+=======
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
 class Debug(object):
     def __init__(self,flag):
         self.debug=flag 
@@ -9,6 +12,7 @@ class Debug(object):
         if self.debug:
             print(*args,**kwargs)
 
+<<<<<<< HEAD
     def kill_thread(self,thread_id):
         """
         ：params　需要被结束的线程对象
@@ -47,3 +51,6 @@ debug = Debug(True)
 
 
     
+=======
+debug = Debug(True)
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97

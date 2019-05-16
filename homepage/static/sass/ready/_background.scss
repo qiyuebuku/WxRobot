@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*   Background   */
 
 .bg-default {
@@ -22,4 +23,30 @@
 
 .bg-danger {
   background: $danger-color !important;
+=======
+/*   Background   */
+
+.bg-default {
+  background: $default-color !important;
+}
+
+.bg-primary {
+  background: $primary-color !important;
+}
+
+.bg-info {
+  background: $info-color !important;
+}
+
+.bg-success {
+  background: $success-color !important;
+}
+
+.bg-warning {
+  background: $warning-color !important;
+}
+
+.bg-danger {
+  background: $danger-color !important;
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
 }

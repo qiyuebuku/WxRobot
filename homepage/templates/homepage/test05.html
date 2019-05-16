@@ -1,0 +1,21 @@
+{% load static %} 
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" class="map chart chart-pipe" style="height: 500px;"></div>
+        <script type="text/javascript" src="{% static 'js/echarts/echarts.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/echarts/echarts-gl.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/echarts/ecStat.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/echarts/dataTool.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/echarts/china.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/echarts/world.js' %}"></script>
+        <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=rij8VHia6LycEdbLzhjq5ecze4DW9gXG"></script>
+        <script type="text/javascript" src="{% static 'js/echarts/bmap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/echarts/simplex.js' %}"></script>
+    <script src="{% static 'js/echarts/test01.js' %}"></script>
+
+   </body>
+</html>

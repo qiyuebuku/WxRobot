@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*     Nav Search     */
 
 .nav-search {
@@ -22,4 +23,30 @@
     font-size: 21px;
     color: #666;
   }
+=======
+/*     Nav Search     */
+
+.nav-search {
+  .input-group {
+    border: 1px solid #eee;
+    background: #eee;
+    border-radius: 50px;
+    &:hover, &:focus {
+      border: 1px solid #ddd;
+    }
+  }
+  .form-control {
+    border: 0;
+    background: $transparent-bg;
+    font-size: 14px;
+  }
+  .input-group-text {
+    border: 0;
+    background: $transparent-bg;
+  }
+  .search-icon {
+    font-size: 21px;
+    color: #666;
+  }
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
 }

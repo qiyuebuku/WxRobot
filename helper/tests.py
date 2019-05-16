@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # coding:utf-8
 import json
 import requests
@@ -176,3 +177,8 @@ embed()
 #             ret = auto_ai(msg.text)
 #         print('[发送]' + str(ret))
 #         return ret
+=======
+from django.test import TestCase
+
+# Create your tests here.
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97

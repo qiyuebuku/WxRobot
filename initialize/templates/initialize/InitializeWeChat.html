@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -158,4 +159,165 @@
     </script>
 </body>
 
+=======
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <style>
+        body {
+            margin: 0;
+            /* background-image: url(static/image/background.jpg); */
+            background-image: url({% static "image/background.jpg" %});
+            background-repeat: no-repeat;
+            background-position: 0% 0%;
+            background-size: cover;
+            /* background-color: #22C3AA; */
+        }
+
+        .body_page {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 400px;
+            height: 550px;
+            margin-left: -200px;
+            margin-top: -275px;
+            background-color: white;
+            border-radius: 20px;
+            border: 1px solid #dddddd;
+        }
+
+        #img_page {
+            position: absolute;
+            left: 50%;
+            top: 40%;
+            width: 350px;
+            height: 350px;
+            margin-left: -175px;
+            margin-top: -175px;
+        }
+
+        .mask_layer {
+            background-color: black;
+            opacity: 0.8;
+        }
+
+        .Position {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 50%;
+            margin-left: -50px;
+            margin-top: -50px;
+        }
+
+        .refrshCode {
+            top: 40%;
+            z-index: 99;
+        }
+
+        .text {
+            top: 60%;
+            font-size: 50px;
+            color: white;
+            font-weight: bolder;
+        }
+
+        .p1 {
+            font-size: 15px;
+            color: #a3a3a3;
+            text-align: center;
+            position: absolute;
+            width: 120px;
+            height: 30px;
+            top: 80%;
+            left: 50%;
+            margin-top: -15px;
+            margin-left: -60px;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap-theme.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.css' %}">
+</head>
+
+<body>
+    <!-- {#二维码显示#} -->
+    <div class="body_page" id="qr_code">
+        <h1 style="margin: 0 auto;text-align: center" id="hint">扫描二维码登陆</h1>
+
+        <!-- 经过base64编码的图片在html的<img>标签显示时，需要添加一些属性，即下面的data:image/jpeg;base64,编码 -->
+        <img src="data:image/jpeg;base64,{{ qrcode }}" id="img_page" />
+        <span style="display:none;" id='uuid'>{{ uuid }}</span>
+        <p class="p1">需要配合手机使用</p>
+    </div>
+
+    <!-- {#遮罩层，默认为隐藏状态#} -->
+    <div class="body_page mask_layer hide" id="qr_code_mask_layer">
+        <div class="Position refrshCode">
+            <span class="glyphicon glyphicon-refresh " style="color: rgb(255, 255, 255);font-size: 100px;">
+                <br>
+            </span>
+        </div>
+        <div class="Position text">
+            刷新
+        </div>
+    </div>
+
+
+    <script src="{% static 'js/jquery-1.12.4.js' %}"></script>
+    <script src="{% static 'js/jquery.cookie.js' %}"></script>
+    <script>
+        var socket = new WebSocket('ws://' + window.location.host + "/initialize/{{username}}");
+        socket.onopen = function open() {
+            console.log('Websockets connection created.');
+        };
+
+        socket.onmessage = function message(event) {
+            var data = JSON.parse(event.data);
+            console.log('接收到消息', data)
+
+            
+            if (data['init_status']) {
+                console.log('登录成功')
+                alert(data['info']);
+                window.location = "/mainpage";
+            } 
+
+            else if (data['init_status'] == false) {
+                console.log('登陆失败')
+                alert(data['error']);
+            } 
+
+            else if (data['qrcode']) {
+                var src = "data:image/jpeg;base64," + data['qrcode'];
+                $('#img_page').attr('src', src);
+            }
+
+            else {
+                var username = encodeURI(data['username']);
+                if (data['is_logged_in']) {
+                    // user.html(username + ': 在线');
+                }
+
+                else {
+                    // user.html(username + ': 离线');
+                }
+            }
+        };
+        if (socket.readyState == WebSocket.OPEN) {
+            socket.onopen();
+        }
+
+    </script>
+</body>
+
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
 </html>

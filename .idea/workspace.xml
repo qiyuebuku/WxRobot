@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="4cf7444f-7ac4-4dc3-a718-fdb5b73ead65" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/test/WxRobot/databases/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/WxRobot/databases/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/WxRobot/homepage/static/css/font.css" beforeDir="false" afterPath="$PROJECT_DIR$/test/WxRobot/homepage/static/css/font.css" afterDir="false" />
@@ -13,6 +14,38 @@
       <change beforePath="$PROJECT_DIR$/test/WxRobot/homepage/static/js/echarts/simplex.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/WxRobot/homepage/static/js/echarts/simplex.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/WxRobot/homepage/static/js/echarts/world.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/WxRobot/homepage/static/js/echarts/world.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/WxRobot/wxRobot/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/WxRobot/wxRobot/settings.py" afterDir="false" />
+=======
+    <list default="true" id="7ca16fc0-991d-4cac-9c29-a26d1b3ed5cd" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/static/css/font-awesome.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/static/css/popup-box.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/static/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/static/fonts/FontAwesome.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/static/fonts/fontawesome-webfont.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/static/fonts/fontawesome-webfont.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/static/fonts/fontawesome-webfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/static/fonts/fontawesome-webfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/static/fonts/fontawesome-webfont.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/static/images/banner2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/static/images/dott.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/static/images/p1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/static/images/p2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/static/images/prof.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/static/js/jquery-2.1.4.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/static/js/jquery.magnific-popup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login/templates/login/index2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/机器人基本模块分析.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/机器人基本模块分析.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homepage/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/homepage/helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homepage/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/homepage/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homepage/static/js/demo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/homepage/static/js/mainpage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/homepage/templates/homepage/mainpage.html" beforeDir="false" afterPath="$PROJECT_DIR$/homepage/templates/homepage/mainpage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homepage/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/homepage/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxRobot/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/wxRobot/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxRobot/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/wxRobot/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxpy_puid.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/wxpy_puid.pkl" afterDir="false" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,6 +54,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
@@ -30,41 +64,113 @@
               <caret line="30" column="35" lean-forward="true" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
-              </folding>
+=======
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="intelligent_chat.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/homepage/static/js/intelligent_chat.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2581">
+              <caret line="89" column="25" selection-start-line="89" selection-start-column="25" selection-end-line="89" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mainpage.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/homepage/templates/homepage/mainpage.html">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wxRobot/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="423">
-              <caret line="1369" column="30" lean-forward="true" selection-start-line="1369" selection-start-column="30" selection-end-line="1369" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/homepage/static/base.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2697">
-              <caret line="93" column="17" selection-start-line="93" selection-start-column="17" selection-end-line="93" selection-end-column="17" />
+            <state relative-caret-position="580">
+              <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/homepage/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="339">
+              <caret line="135" column="34" selection-start-line="135" selection-start-column="34" selection-end-line="135" selection-end-column="34" />
+              <folding>
+                <element signature="e#0#44#0" expanded="true" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="mainpage.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/homepage/templates/homepage/mainpage.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="423">
+              <caret line="1369" column="30" lean-forward="true" selection-start-line="1369" selection-start-column="30" selection-end-line="1369" selection-end-column="30" />
+=======
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/homepage/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="base.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/homepage/static/base.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2697">
+              <caret line="93" column="17" selection-start-line="93" selection-start-column="17" selection-end-line="93" selection-end-column="17" />
+=======
+      <file leaf-file-name="index2.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/login/templates/login/index2.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="174">
+              <caret line="54" column="26" lean-forward="true" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/initialize/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="290">
               <caret line="134" column="25" lean-forward="true" selection-start-line="134" selection-start-column="25" selection-end-line="134" selection-end-column="25" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
+=======
+        <entry file="file://$PROJECT_DIR$/login/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="259">
+              <caret line="92" column="31" lean-forward="true" selection-start-line="92" selection-start-column="31" selection-end-line="92" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="bot_manager.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/helper/bot_manager.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -73,6 +179,22 @@
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
+=======
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/wxRobot/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2726">
+              <caret line="94" column="1" lean-forward="true" selection-start-line="94" selection-start-column="1" selection-end-line="94" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mainpage.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/homepage/templates/homepage/mainpage.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="41006">
+              <caret line="1414" selection-start-line="1414" selection-end-line="1414" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
             </state>
           </provider>
         </entry>
@@ -81,6 +203,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+<<<<<<< HEAD
       <find>time</find>
       <find>头像分析</find>
       <find>get_bot</find>
@@ -88,15 +211,41 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/test/WxRobot" />
+=======
+      <find>智能聊天</find>
+      <find>好友选择框</find>
+      <find>authorized_object</find>
+      <find>好友</find>
+      <find>好友选择</find>
+      <find>login-w3l</find>
+      <find>login-section</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/homepage/static/js/base.js" />
         <option value="$PROJECT_DIR$/helper/bot_manager.py" />
         <option value="$PROJECT_DIR$/initialize/views.py" />
         <option value="$PROJECT_DIR$/homepage/templates/homepage/mainpage.html" />
         <option value="$PROJECT_DIR$/homepage/views.py" />
+=======
+        <option value="$PROJECT_DIR$/homepage/helper.py" />
+        <option value="$PROJECT_DIR$/homepage/templates/homepage/mainpage.html" />
+        <option value="$PROJECT_DIR$/docs/机器人基本模块分析.txt" />
+        <option value="$PROJECT_DIR$/wxRobot/urls.py" />
+        <option value="$PROJECT_DIR$/homepage/static/js/intelligent_chat.js" />
+        <option value="$PROJECT_DIR$/wxRobot/settings.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/ff992e2c-1ba4-4ab4-8942-f9cd73bf4b96/console.sql" />
+        <option value="$PROJECT_DIR$/homepage/views.py" />
+        <option value="$PROJECT_DIR$/../../WEB/前端/网页模板/用户登陆/02/html/index.html" />
+        <option value="$PROJECT_DIR$/homepage/models.py" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
       </list>
     </option>
   </component>
@@ -110,17 +259,28 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
+<<<<<<< HEAD
     <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+=======
+    <option name="x" value="487" />
+    <option name="y" value="203" />
+    <option name="width" value="990" />
+    <option name="height" value="730" />
+  </component>
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="Scope" />
+=======
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -131,28 +291,41 @@
             <path>
               <item name="WxRobot" type="b2602c69:ProjectViewProjectNode" />
               <item name="WxRobot" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="helper" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="WxRobot" type="b2602c69:ProjectViewProjectNode" />
               <item name="WxRobot" type="462c0819:PsiDirectoryNode" />
               <item name="homepage" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="login" type="462c0819:PsiDirectoryNode" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
             </path>
             <path>
               <item name="WxRobot" type="b2602c69:ProjectViewProjectNode" />
               <item name="WxRobot" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="homepage" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="login" type="462c0819:PsiDirectoryNode" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
               <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="WxRobot" type="b2602c69:ProjectViewProjectNode" />
               <item name="WxRobot" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="homepage" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="login" type="462c0819:PsiDirectoryNode" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="WxRobot" type="b2602c69:ProjectViewProjectNode" />
               <item name="WxRobot" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="homepage" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="homepage" type="462c0819:PsiDirectoryNode" />
@@ -161,23 +334,41 @@
               <item name="WxRobot" type="b2602c69:ProjectViewProjectNode" />
               <item name="WxRobot" type="462c0819:PsiDirectoryNode" />
               <item name="initialize" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="wxRobot" type="462c0819:PsiDirectoryNode" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
+=======
+      <pane id="Scope" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< HEAD
+=======
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="database.console.LAST_STATE" value="true" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+<<<<<<< HEAD
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\代码\python\项目\WxRobot\部署环境\WxRobot (2)\WxRobot\homepage\static" />
+=======
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\代码\python\项目\WxRobot\login\static" />
+      <recent name="D:\代码\python\项目\WxRobot\login\templates\login" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
     </key>
   </component>
   <component name="RunDashboard">
@@ -199,8 +390,14 @@
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+<<<<<<< HEAD
       </envs>
       <option name="SDK_HOME" value="" />
+=======
+        <env name="DJANGO_SETTINGS_MODULE" value="wxRobot.settings" />
+      </envs>
+      <option name="SDK_HOME" value="E:\Anaconda3\python.exe" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -221,11 +418,19 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< HEAD
       <changelist id="4cf7444f-7ac4-4dc3-a718-fdb5b73ead65" name="Default" comment="" />
       <created>1557903829029</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1557903829029</updated>
+=======
+      <changelist id="7ca16fc0-991d-4cac-9c29-a26d1b3ed5cd" name="Default" comment="" />
+      <created>1551683133098</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1551683133098</updated>
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
     </task>
     <servers />
   </component>
@@ -238,11 +443,19 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2553305" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
+=======
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32922733" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.31690928" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14392324" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -253,6 +466,10 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+<<<<<<< HEAD
+=======
+      <window_info anchor="bottom" id="Database Console" order="8" weight="0.32922733" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
       <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
@@ -263,16 +480,54 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/homepage/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1769">
           <caret line="61" column="23" lean-forward="true" selection-start-line="61" selection-start-column="23" selection-end-line="61" selection-end-column="23" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/homepage/static/js/intelligent_chat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2581">
+          <caret line="89" column="25" selection-start-line="89" selection-start-column="25" selection-end-line="89" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wxRobot/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../WEB/前端/网页模板/用户登陆/02/html/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="696">
+          <caret line="24" column="7" lean-forward="true" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homepage/templates/homepage/mainpage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="41006">
+          <caret line="1414" selection-start-line="1414" selection-end-line="1414" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homepage/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3103">
+          <caret line="114" column="13" selection-start-line="114" selection-start-column="13" selection-end-line="114" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/homepage/templates/homepage/mainpage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="39498">
@@ -293,30 +548,127 @@
           <caret line="37" column="17" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/homepage/static/js/intelligent_chat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2581">
+          <caret line="89" column="25" selection-start-line="89" selection-start-column="25" selection-end-line="89" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wxRobot/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../WEB/前端/网页模板/用户登陆/02/html/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="696">
+          <caret line="24" column="7" lean-forward="true" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homepage/templates/homepage/mainpage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="41006">
+          <caret line="1414" selection-start-line="1414" selection-end-line="1414" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homepage/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3103">
+          <caret line="114" column="13" lean-forward="true" selection-start-line="114" selection-start-column="13" selection-end-line="114" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/helper/bot_manager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10846">
           <caret line="390" lean-forward="true" selection-start-line="390" selection-end-line="390" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/homepage/static/js/intelligent_chat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2581">
+          <caret line="89" column="25" selection-start-line="89" selection-start-column="25" selection-end-line="89" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wxRobot/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homepage/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3480">
+          <caret line="126" column="20" selection-start-line="126" selection-start-column="20" selection-end-line="126" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/homepage/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3654">
           <caret line="126" column="30" lean-forward="true" selection-start-line="126" selection-start-column="30" selection-end-line="126" selection-end-column="30" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/homepage/templates/homepage/mainpage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="41006">
+          <caret line="1414" selection-start-line="1414" selection-end-line="1414" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../WEB/前端/网页模板/用户登陆/02/html/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="812">
+          <caret line="28" column="14" lean-forward="true" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homepage/static/js/intelligent_chat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2581">
+          <caret line="89" column="25" selection-start-line="89" selection-start-column="25" selection-end-line="89" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wxRobot/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="23" column="43" lean-forward="true" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homepage/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3161">
+          <caret line="115" lean-forward="true" selection-start-line="115" selection-end-line="115" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/helper/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="87">
@@ -328,11 +680,53 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2697">
           <caret line="93" column="17" selection-start-line="93" selection-start-column="17" selection-end-line="93" selection-end-column="17" />
+=======
+    <entry file="file://$PROJECT_DIR$/wxRobot/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2726">
+          <caret line="94" column="1" lean-forward="true" selection-start-line="94" selection-start-column="1" selection-end-line="94" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/homepage/templates/homepage/mainpage.html">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="41006">
+          <caret line="1414" lean-forward="true" selection-start-line="1414" selection-end-line="1414" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homepage/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="5" column="47" lean-forward="true" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/机器人基本模块分析.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-406">
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homepage/helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="133" column="22" lean-forward="true" selection-start-line="133" selection-start-column="22" selection-end-line="133" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="6" column="8" lean-forward="true" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homepage/templates/homepage/mainpage.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="423">
           <caret line="1369" column="30" lean-forward="true" selection-start-line="1369" selection-start-column="30" selection-end-line="1369" selection-end-column="30" />
         </state>
@@ -354,19 +748,110 @@
           <caret line="394" column="35" lean-forward="true" selection-start-line="394" selection-start-column="35" selection-end-line="394" selection-end-column="35" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+=======
+        <state relative-caret-position="41006">
+          <caret line="1414" selection-start-line="1414" selection-end-line="1414" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wxRobot/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homepage/static/js/intelligent_chat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2581">
+          <caret line="89" column="25" selection-start-line="89" selection-start-column="25" selection-end-line="89" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/ff992e2c-1ba4-4ab4-8942-f9cd73bf4b96/console_1.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/ff992e2c-1ba4-4ab4-8942-f9cd73bf4b96/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="11" lean-forward="true" selection-start-column="11" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homepage/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="135" column="34" selection-start-line="135" selection-start-column="34" selection-end-line="135" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/homepage/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="30" column="35" lean-forward="true" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/../../WEB/前端/网页模板/用户登陆/02/html/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="64" column="40" selection-start-line="64" selection-start-column="40" selection-end-line="64" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="7" column="58" lean-forward="true" selection-start-line="7" selection-start-column="58" selection-end-line="7" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login/templates/login/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="9" column="22" lean-forward="true" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homepage/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login/templates/login/index2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="54" column="26" lean-forward="true" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="92" column="31" lean-forward="true" selection-start-line="92" selection-start-column="31" selection-end-line="92" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/wxRobot/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2726">
+          <caret line="94" column="1" lean-forward="true" selection-start-line="94" selection-start-column="1" selection-end-line="94" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
   </component>
 </project>

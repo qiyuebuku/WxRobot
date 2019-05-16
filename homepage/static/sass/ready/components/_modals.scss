@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*     Modal    */
 
 .modal {
@@ -9,4 +10,17 @@
 .modal-content {
   border-radius: .4rem !important;
   border: 0 !important;
+=======
+/*     Modal    */
+
+.modal {
+  .bg-default .modal-title, .bg-primary .modal-title, .bg-info .modal-title, .bg-success .modal-title, .bg-warning .modal-title, .bg-danger .modal-title {
+    color: $white-color !important;
+  }
+}
+
+.modal-content {
+  border-radius: .4rem !important;
+  border: 0 !important;
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
 }

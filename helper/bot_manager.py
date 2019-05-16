@@ -1,6 +1,7 @@
 import json
 import base64
 from threading import Thread
+<<<<<<< HEAD
 from multiprocessing import Process 
 import time
 from wxpy import *
@@ -16,6 +17,13 @@ from .plugs_manager import plugs_management as pm
 
 from .debug import debug
 
+=======
+import time
+from wxpy import *
+from helper import bot_manager as bm
+from helper.channels_manager import logged_channels as lc
+from databases import models
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
 # from wordcloud import WordCloud
 # import jieba
 # import matplotlib.pyplot as plt
@@ -25,8 +33,13 @@ from .debug import debug
 
 
 
+<<<<<<< HEAD
 
     
+=======
+class Plugs_management():
+    pass 
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
 
 
 
@@ -171,6 +184,7 @@ class Robot_management():
         :param bot_uuid 机器人的uuid标识符
         :return 名称、头像，微信ID
         """
+<<<<<<< HEAD
         bot = self.get_bot(puid)
         if not bot:
             return None
@@ -224,6 +238,41 @@ class Robot_management():
             return details
         except:
             return None
+=======
+        # bot_dict = self.get_bot_dict(bot_puid)
+        bot = self.get_bot(puid)
+        if not bot:
+            return None 
+        print("get_bot:-----------------------------",bot)
+        # 获取登陆者的详细信息
+        user_details = bot.user_details(bot.self)
+
+        # 获取插件用户所拥有插件信息                                               
+        plug_querys = models.UserInfo.objects.filter(username = username).first().userplugs_set.all()
+        user_plugs = [plug_query for plug_query in plug_querys if plug_query.plug.isActive]
+        print("plugs",user_plugs)
+        details={
+        # 微信名称
+            'user_name':user_details.name,
+        # 微信头像
+            'avatar':base64.b64encode(user_details.get_avatar()).decode() ,
+        # 微信ID号
+            'status':'正常',
+        # 性别
+            'sex' : user_details.sex,
+        # 省份
+            'province' : user_details.province,
+        # 城市
+            'city' : user_details.city,
+        # 个性签名
+            'signature' : user_details.signature,
+        # 用户的插件
+            'user_plugs':user_plugs,
+        # 当前登录的用户名
+            'username':username,
+        }
+        return details
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
 
     def start_data_analysis(self,puid,username):
         """
@@ -239,6 +288,7 @@ class Robot_management():
         """
             数据分析完成后的回调函数
         """
+<<<<<<< HEAD
         for _ in range(3):
             cm.reply_channel_send(username,{
                     'analysis_result':data
@@ -246,6 +296,15 @@ class Robot_management():
             )
             time.sleep(2)
         
+=======
+        channel = lc.get_channels(username=username)
+        print('callback_analysis_result')
+        channel.reply_channel.send({
+            'text': json.dumps({
+                'analysis_result':data
+            })
+        })
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
 
 
     def get_data_intelligent(self,puid,username,data_intelligent=None):
@@ -335,6 +394,7 @@ class Robot_management():
             数据分析完成后的回调函数
         """
         # print(data,username)
+<<<<<<< HEAD
         # channel = lc.get_channels(username=username)
         # while not channel:
         #     channel = lc.get_channels(username=username)
@@ -367,6 +427,15 @@ class Robot_management():
             )
             time.sleep(2)
 
+=======
+        channel = lc.get_channels(username=username)
+
+        channel.reply_channel.send({
+            'text': json.dumps({
+                'intelligent_result':data
+            })
+        })
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
     
 
 
@@ -381,16 +450,23 @@ class Robot_management():
             :param bot
         """
         fs = Functional_scheduler(bot,username)
+<<<<<<< HEAD
         self.robots[puid] =[bot,fs]
         # fs.setDaemon(True)
         fs.start()
 
+=======
+        fs.setDaemon(True)
+        fs.start()
+        self.robots[puid] =[bot,fs]
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
 
 
 
 
     def get_bot(self, puid):
         try:
+<<<<<<< HEAD
             return self.robots.get(puid)[0]
             # for i in range(1,10):
             #     bot = self.robots.get(puid)
@@ -402,6 +478,10 @@ class Robot_management():
             #         time.sleep(0.1) #0.1，0.2...
             # else:
             #     return None
+=======
+            print("get_bot------------------------",self.robots[puid][0])
+            return self.robots[puid][0]
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
         except:
             return None
 
@@ -412,6 +492,7 @@ class Robot_management():
             return None 
 
     def del_bot(self,puid):
+<<<<<<< HEAD
         bot = self.get_bot(puid)
         bot.registered.disable()
         
@@ -441,6 +522,10 @@ class Robot_management():
                 select_groups.append(group[0])
         return {'select_friends':select_friends,'select_groups':select_groups}
 
+=======
+        del self.robots[puid]
+
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
     
 
 
@@ -456,6 +541,7 @@ class Functional_scheduler(Thread):
         self.friends = []
         self.groups = []
         self.select_function = {}
+<<<<<<< HEAD
         self.regularly_send_flag =True
 
         # 获取所有的好友和群组对象
@@ -463,6 +549,10 @@ class Functional_scheduler(Thread):
         self.groups_all = bot.groups()
         
         
+=======
+        tuling = Tuling(api_key='91bfe84c2b2e437fac1cdb0c571cac91')
+
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
     def run(self):
         self.functional_scheduler()
 
@@ -470,6 +560,7 @@ class Functional_scheduler(Thread):
         bot = self.bot  
         friends = self.friends 
         groups = self.groups 
+<<<<<<< HEAD
         tuling = Tuling(api_key='91bfe84c2b2e437fac1cdb0c571cac91')
 
         def get_plug(msg):
@@ -567,11 +658,28 @@ class Functional_scheduler(Thread):
                 print('发送消息：',ret)
                 msg.reply(ret)
 
+=======
+
+   
+
+        @bot.register(self.friends)
+        def friends_message(msg):
+            print('[接收来自好友：]' + str(msg))
+            if (msg.type != 'Text'):
+                ret = '[奸笑][奸笑]'
+            else:
+                print('准备调用图灵')
+                ret = self.tuling.do_reply(msg)
+                print("ret",ret)
+            print('[发送]' + str(ret))
+            return ret
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
 
         @bot.register(self.groups)
         def group_message(msg):
             print('[接收来自群聊：]' + str(msg))
             if msg.is_at:
+<<<<<<< HEAD
                 # 对接受到的消息进行解析
                 # 并根据消息类型选择插件进行处理
                 # 获取消息的解析结果
@@ -580,6 +688,17 @@ class Functional_scheduler(Thread):
                 return ret
 
         
+=======
+                if (msg.type != 'Text'):
+                    ret = '[奸笑][奸笑]'
+                else:
+                    ret = self.tuling.reply_text(msg)
+                    print("ret",ret)
+
+                print('[发送]' + str(ret))
+                return ret
+
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
 
     def refresh_listening_obj(self,puid):
         print('================----------------================')
@@ -587,8 +706,13 @@ class Functional_scheduler(Thread):
         print(puid,bot,sep='\n')
 
         # 获取所有的好友和群组对象
+<<<<<<< HEAD
         friends = self.friends_all
         groups = self.groups_all
+=======
+        friends = bot.friends()   #获取更新好友列表
+        groups = bot.groups()
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
 
         # 从数据库中获取所有已经被选中的好友和群组puid
         m_friends = models.SelectedFriends.objects.all()
@@ -606,13 +730,21 @@ class Functional_scheduler(Thread):
         for f in m_friends:
             friend = friends.search(puid =f.fid)
             if friend and friend[0] not in self.friends:
+<<<<<<< HEAD
                 # print("添加好友：",friend[0])
+=======
+                print("添加好友：",friend[0])
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
                 self.friends.append(friend[0])
         # self.groups = [groups.search(puid == g.puid) for g in m_groups if groups.search(puid == g.puid)]
         for g in m_groups:
             group = groups.search(puid =g.gid)
             if group and groups[0] not in self.groups:
+<<<<<<< HEAD
                 # print("添加群聊：",group[0])
+=======
+                print("添加群聊：",group[0])
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
                 self.groups.append(group[0])
         # print(self.friends,self.groups,sep="\n")
 
@@ -623,6 +755,7 @@ class Functional_scheduler(Thread):
         plug_querys = models.UserInfo.objects.filter(username = self.username).first().userplugs_set.filter(isActive=True)
         # 清空所有原先功能状态
         self.select_function.clear()
+<<<<<<< HEAD
         
         self.select_function = {"Text":{},"Map":{},"Card":{},"Note":{},"Sharing":{},"Picture":{},
             "Recording":{},
@@ -711,6 +844,17 @@ class Functional_scheduler(Thread):
                     break  
         self.regularly_send_thread = Thread(target=run)
         self.regularly_send_thread.start()
+=======
+        for plug_query in plug_querys:
+            if not plug_query.plug.isActive:
+                continue
+            plug = plug_query.plug
+            self.select_function[plug.wake_word] = {'name':plug.ptitle,'plug_path':plug.plug_path}
+
+        print("select_function",self.select_function)
+
+
+>>>>>>> acb8c86e5915306157008056c793ddc27ee3fd97
 
 
 
