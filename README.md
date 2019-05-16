@@ -42,4 +42,6 @@ logintoRegister 登陆和注册
 
 部分截图
 ----------------
+初始化微信界面
+![Image text](https://github.com/qiyuebuku/img-folder/raw/master/%E6%89%B9%E6%B3%A8%202019-05-16%20202537.png)
 
