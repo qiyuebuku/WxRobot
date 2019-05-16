@@ -1,0 +1,9 @@
+nohup: ignoring input
+usage: daphne [-h] [-p PORT] [-b HOST] [-u UNIX_SOCKET] [--fd FILE_DESCRIPTOR]
+              [-e SOCKET_STRINGS] [-v VERBOSITY] [-t HTTP_TIMEOUT]
+              [--access-log ACCESS_LOG] [--ping-interval PING_INTERVAL]
+              [--ping-timeout PING_TIMEOUT]
+              [--ws-protocol [WS_PROTOCOLS [WS_PROTOCOLS ...]]]
+              [--root-path ROOT_PATH] [--proxy-headers]
+              channel_layer
+daphne: error: argument -b/--bind: expected one argument
