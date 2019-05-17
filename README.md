@@ -70,15 +70,15 @@ def main(msg,plug_dir,fd2):
 部分截图
 ----------------
 登陆界面
-![Image text](https://github.com/qiyuebuku/img-folder/blob/master/%E6%89%B9%E6%B3%A8%202019-05-17%20125000.png)
+![Image text](https://github.com/qiyuebuku/img-folder/blob/master/WxRobot/%E6%89%B9%E6%B3%A8%202019-05-17%20125000.png)
 初始化微信
-![Image text](https://github.com/qiyuebuku/img-folder/raw/master/%E6%89%B9%E6%B3%A8%202019-05-16%20202537.png)
+![Image text](https://github.com/qiyuebuku/img-folder/raw/master/WxRobot/%E6%89%B9%E6%B3%A8%202019-05-16%20202537.png)
 数据统计
-![Image text](https://github.com/qiyuebuku/img-folder/blob/master/%E6%89%B9%E6%B3%A8%202019-05-17%20125027.png)
+![Image text](https://github.com/qiyuebuku/img-folder/blob/master/WxRobot/%E6%89%B9%E6%B3%A8%202019-05-17%20125027.png)
 插件中心
-![Image text](https://github.com/qiyuebuku/img-folder/blob/master/%E6%89%B9%E6%B3%A8%202019-05-17%20125048.png)
+![Image text](https://github.com/qiyuebuku/img-folder/blob/master/WxRobot/%E6%89%B9%E6%B3%A8%202019-05-17%20125048.png)
 定时发送
-![Image text](https://github.com/qiyuebuku/img-folder/blob/master/%E6%89%B9%E6%B3%A8%202019-05-17%20125103.png)
+![Image text](https://github.com/qiyuebuku/img-folder/blob/master/WxRobot/%E6%89%B9%E6%B3%A8%202019-05-17%20125103.png)
 好友管理 
-![Image text](https://github.com/qiyuebuku/img-folder/blob/master/%E6%89%B9%E6%B3%A8%202019-05-17%20125305.png)
+![Image text](https://github.com/qiyuebuku/img-folder/blob/master/WxRobot/%E6%89%B9%E6%B3%A8%202019-05-17%20125305.png)
 
