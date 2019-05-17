@@ -55,8 +55,4 @@ logintoRegister 登陆和注册
 ![Image text](https://github.com/qiyuebuku/img-folder/blob/master/%E6%89%B9%E6%B3%A8%202019-05-17%20125103.png)
 好友管理 
 ![Image text](https://github.com/qiyuebuku/img-folder/blob/master/%E6%89%B9%E6%B3%A8%202019-05-17%20125305.png)
-=======
-初始化微信界面
-![Image text](https://github.com/qiyuebuku/img-folder/raw/master/%E6%89%B9%E6%B3%A8%202019-05-16%20202537.png)
->>>>>>> 8b7332b34273e9446c1a09e74ff3b3a2cf1a42fa
 
