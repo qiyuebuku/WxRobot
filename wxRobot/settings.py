@@ -11,8 +11,17 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+# import subprocess 
+# import sys 
+# path = os.path.dirname(os.path.dirname(__file__))
+# sys.path.append(path)
+# print(path)
+# output = subprocess.Popen('daphne -b 0.0.0.0 -p 8000 --proxy-headers wxRobot.asgi:channel_layer',cwd="/root/WxRobot")
+# print(output)
+# output = subprocess.Popen('python3 -u manage.py runworker',cwd="/root/WxRobot")
+# print(output)
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -94,7 +103,7 @@ DATABASES = {
         'NAME': 'wxrobot',
         'USER': 'root',
         'PASSWORD': '数据库密码',
-        'HOST':'你的服务器地址',
+        'HOST':'地址',
         'PORT':'3306',
     }
 }

@@ -45,7 +45,7 @@ class Plugs_management():
                 if mode:
                     self.__unpack_plugin(file_path)
                 attr_name = plug.plug.path.split('/')[-1:][0][:-4]
-                print('正在加载插件:',attr_name)
+                # print('正在加载插件:',attr_name)
                 plug_path = "from static.upload.Plugs."+attr_name.title()+" import "+attr_name
                 exec(plug_path)
                 func = eval(attr_name)
