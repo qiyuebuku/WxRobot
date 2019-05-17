@@ -70,9 +70,6 @@ def main(msg,plug_dir,fd2):
     s = str(msg.text)
     if len(s)<=3:
        s +="美女"
-    print(s)
-    print(dir(msg))
     cata=re.findall(pattern,s)[0]
     filename = getSogouImag(cata,plug_dir)
-    print(filename)
     fd2.send({'type':"@img@",'content':filename})

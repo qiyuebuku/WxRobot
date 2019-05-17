@@ -12,10 +12,7 @@
 from wxpy import *
 tuling = Tuling(api_key='91bfe84c2b2e437fac1cdb0c571cac91')
 
-print('sdfsfsdfsdfsdf')
-print('sdfsfsdfsdfsdf')
 def main(msg,plug_dir,fd2):
-    print('sdfsfsdfsdfsdf')
     print(plug_dir)
     # 图灵完成自动回复后使用管道将结果返回给父进程
     def reply_text(msg):

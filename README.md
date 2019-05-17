@@ -38,11 +38,37 @@ helper  机器人核心代码
 homepage    后台交互 
 initialize  初始化微信 
 logintoRegister 登陆和注册 
+Plugs   插件存放处
+```
+
+自定义插件
+----------------
+```
+必须将程序写入到main函数里
+:params msg 接收到的消息对象
+:params plug_dir 插件所在的路径
+:params fd2 用于将处理好的结果返回给用户
+    - 由 类型 和 内容 两个部分组成，若 省略类型，将作为纯文本消息发送
+    - 类型 部分可为: ‘@fil@’, ‘@img@’, ‘@msg@’, ‘@vid@’ (不含引号)
+    - 分别表示: 文件，图片，纯文本，视频
+    - 内容 部分可为: 文件、图片、视频的路径，或纯文本的内容
+```
+###### 例子
+```
+from wxpy import *
+tuling = Tuling(api_key='91bfe84c2b2e437fac1cdb0c571cac91')
+def main(msg,plug_dir,fd2):
+    print('sdfsfsdfsdfsdf')
+    print(plug_dir)
+    # 图灵完成自动回复后使用管道将结果返回给父进程
+    def reply_text(msg):
+        text = tuling.reply_text(msg)
+        fd2.send({'type':"@msg@",'content':text})
+    reply_text(msg)
 ```
 
 部分截图
 ----------------
-<<<<<<< HEAD
 登陆界面
 ![Image text](https://github.com/qiyuebuku/img-folder/blob/master/%E6%89%B9%E6%B3%A8%202019-05-17%20125000.png)
 初始化微信
@@ -55,8 +81,4 @@ logintoRegister 登陆和注册
 ![Image text](https://github.com/qiyuebuku/img-folder/blob/master/%E6%89%B9%E6%B3%A8%202019-05-17%20125103.png)
 好友管理 
 ![Image text](https://github.com/qiyuebuku/img-folder/blob/master/%E6%89%B9%E6%B3%A8%202019-05-17%20125305.png)
-=======
-初始化微信界面
-![Image text](https://github.com/qiyuebuku/img-folder/raw/master/%E6%89%B9%E6%B3%A8%202019-05-16%20202537.png)
->>>>>>> 8b7332b34273e9446c1a09e74ff3b3a2cf1a42fa
 
