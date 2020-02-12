@@ -12,7 +12,7 @@ chardet==3.0.4
 constantly==15.1.0
 daphne==1.0.3
 dj-database-url==0.4.0
-Django==2.2
+Django==2.2.10
 future==0.17.1
 gunicorn==19.9.0
 haikunator==1.0.1
