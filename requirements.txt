@@ -37,7 +37,7 @@ sqlparse==0.3.0
 supervisor==4.0.1
 Twisted==17.1.0
 txaio==2.6.1
-urllib3==1.24.1
+urllib3==1.26.5
 uWSGI==2.0.18
 wxpy==0.3.9.8
 xpinyin==0.5.6
